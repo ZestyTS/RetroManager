@@ -105,7 +105,7 @@ namespace RetroManager
                         sw.WriteLine(w);
                 }
                 System.Diagnostics.Process.Start(filepath);
-                btnDelete.Visible = true;
+                btnDelete.Enabled = true;
             }
             else
             {
@@ -132,7 +132,7 @@ namespace RetroManager
                     File.Delete(file);
             }
             MessageBox.Show(@"Duplicates Deleted");
-            btnDelete.Visible = false;
+            btnDelete.Enabled = false;
         }
 
         private void DuplicateRemover_Load(object sender, EventArgs e)
