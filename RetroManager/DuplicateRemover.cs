@@ -134,5 +134,13 @@ namespace RetroManager
             MessageBox.Show(@"Duplicates Deleted");
             btnDelete.Visible = false;
         }
+
+        private void DuplicateRemover_Load(object sender, EventArgs e)
+        {
+            ttRegions.IsBalloon = true;
+            ttDirectory.IsBalloon = true;
+            ttRegions.SetToolTip(lbRegions, "Write the priority of certain regions, whatever is not written will fall under the same priority level.\nExample: (USA), (Europe), (Japan)\nKeep in mind that some regions might be written as [U] instead.");
+            ttDirectory.SetToolTip(lbDirectory, "Put the root directory of the roms that will be checked for duplicates, subdirectories will also be checked. \nCurrently checking across multiple emulators at the same time will yield results undesired.");
+        }
     }
 }

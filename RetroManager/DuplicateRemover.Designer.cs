@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtRegions = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbRegions = new System.Windows.Forms.Label();
             this.btnAnalyze = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbDirectory = new System.Windows.Forms.Label();
             this.txtDirectory = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.ttRegions = new System.Windows.Forms.ToolTip(this.components);
+            this.ttDirectory = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // txtRegions
@@ -44,14 +47,14 @@
             this.txtRegions.Size = new System.Drawing.Size(260, 20);
             this.txtRegions.TabIndex = 0;
             // 
-            // label1
+            // lbRegions
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Regions";
+            this.lbRegions.AutoSize = true;
+            this.lbRegions.Location = new System.Drawing.Point(9, 28);
+            this.lbRegions.Name = "lbRegions";
+            this.lbRegions.Size = new System.Drawing.Size(46, 13);
+            this.lbRegions.TabIndex = 1;
+            this.lbRegions.Text = "Regions";
             // 
             // btnAnalyze
             // 
@@ -63,14 +66,14 @@
             this.btnAnalyze.UseVisualStyleBackColor = true;
             this.btnAnalyze.Click += new System.EventHandler(this.BtnSubmit_Click);
             // 
-            // label2
+            // lbDirectory
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Directory";
+            this.lbDirectory.AutoSize = true;
+            this.lbDirectory.Location = new System.Drawing.Point(9, 81);
+            this.lbDirectory.Name = "lbDirectory";
+            this.lbDirectory.Size = new System.Drawing.Size(49, 13);
+            this.lbDirectory.TabIndex = 4;
+            this.lbDirectory.Text = "Directory";
             // 
             // txtDirectory
             // 
@@ -108,12 +111,13 @@
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtDirectory);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbDirectory);
             this.Controls.Add(this.btnAnalyze);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbRegions);
             this.Controls.Add(this.txtRegions);
             this.Name = "DuplicateRemover";
             this.Text = "DuplicateRemover";
+            this.Load += new System.EventHandler(this.DuplicateRemover_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,11 +126,13 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtRegions;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbRegions;
         private System.Windows.Forms.Button btnAnalyze;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbDirectory;
         private System.Windows.Forms.TextBox txtDirectory;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.ToolTip ttRegions;
+        private System.Windows.Forms.ToolTip ttDirectory;
     }
 }
