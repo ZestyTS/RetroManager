@@ -1,56 +1,47 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RetroManager
 {
     public partial class DuplicateRemover : Form
     {
+        private ArrayList _deleteList;
         public DuplicateRemover()
         {
             InitializeComponent();
         }
 
-        private void DuplicateRemover_Load(object sender, EventArgs e)
+        private void BtnSubmit_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnSubmit_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtDirectory.Text))
+            if (string.IsNullOrWhiteSpace(txtDirectory.Text))
             {
-                MessageBox.Show("Directory field can not be empty");
+                MessageBox.Show(@"Directory field can not be empty");
                 return;
             }
             var reader = txtDirectory.Text;
             var directorycheck = Directory.Exists(reader);
-            var deleteList = new ArrayList();
+            _deleteList = new ArrayList();
 
             if (!directorycheck)
             {
-                MessageBox.Show("Please enter a valid directory.");
+                MessageBox.Show(@"Please enter a valid directory.");
                 return;
             }
 
-            var files = Directory.GetFiles(reader);
-            var priority = new ArrayList { "(USA)", "(Europe)", "(Japan)" };
+            var files = Directory.GetFiles(reader, "*.*", SearchOption.AllDirectories);
+            var priority = txtRegions.Text.Replace(" ", string.Empty).Split(',').ToList();
             var regionMap = new Dictionary<string, ArrayList>();
             var regex = new Regex(@"\s*?(?:\(.*?\)|\[.*?\]|\{.*?\})");
 
             foreach (var file in files)
             {
                 var region = regex.Matches(file).Cast<Match>().Aggregate("", (current, match) => current + match.Value);
-                var title = Path.GetFileName(string.IsNullOrEmpty(region) ? file : file.Replace(region, string.Empty));
+                var title = Path.GetFileName(string.IsNullOrWhiteSpace(region) ? file : file.Replace(region, string.Empty));
 
                 region = region.Trim();
 
@@ -63,7 +54,7 @@ namespace RetroManager
             foreach (var file in files)
             {
                 var region = regex.Matches(file).Cast<Match>().Aggregate("", (current, match) => current + match.Value);
-                var title = Path.GetFileName(string.IsNullOrEmpty(region) ? file : file.Replace(region, string.Empty));
+                var title = Path.GetFileName(string.IsNullOrWhiteSpace(region) ? file : file.Replace(region, string.Empty));
                 region = region.Trim();
 
                 if (regionMap[title].Count < 2)
@@ -73,12 +64,12 @@ namespace RetroManager
 
                 if (number == -1)
                 {
-                    deleteList.Add(file);
+                    _deleteList.Add(file);
                     continue;
                 }
 
                 var list = new ArrayList();
-                foreach (var rank in regionMap[title])
+                foreach (string rank in regionMap[title])
                 {
                     if (!(priority.IndexOf(rank) < 0))
                         list.Add(priority.IndexOf(rank));
@@ -88,25 +79,60 @@ namespace RetroManager
 
                 if (list.IndexOf(number) != 0)
                 {
-                    deleteList.Add(file);
+                    _deleteList.Add(file);
                 }
             }
 
-            if (deleteList.Count > 0)
+            if (_deleteList.Count > 0)
             {
-                foreach (var file in deleteList)
-                    lbFiles.Items.Add(file);
+                var filename = "RetroManagerDuplicates";
+                var path = AppDomain.CurrentDomain.BaseDirectory;
+                var duplicatefile = Directory.GetFiles(path, "RetroManagerDuplicates*.txt");
+                
+                if (!(duplicatefile == null || duplicatefile.Length == 0))
+                {
+                    duplicatefile = duplicatefile.OrderByDescending(c => c).ToArray();
+                    var num = new string(duplicatefile[0].Where(char.IsDigit).ToArray());
+
+                    filename += string.IsNullOrWhiteSpace(num) ? "1" : (Convert.ToInt16(num) + 1) + "";
+                }
+
+                filename += ".txt";
+                var filepath = path + filename;
+                using (var sw = new StreamWriter(filepath))
+                {
+                    foreach (string w in _deleteList)
+                        sw.WriteLine(w);
+                }
+                System.Diagnostics.Process.Start(filepath);
+                btnDelete.Visible = true;
             }
             else
             {
-                lbFiles.Items.Add("No duplicate found");
+                MessageBox.Show(@"No duplicate found");
             }
         }
 
-        private static void Delete(string file)
+        private void BtnBrowse_Click(object sender, EventArgs e)
         {
-            File.Delete(file);
+            using (var folderDialog = new FolderBrowserDialog())
+            {
+                var result = folderDialog.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
+                    txtDirectory.Text = folderDialog.SelectedPath;
+            }
         }
 
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            foreach (string file in _deleteList)
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+            MessageBox.Show(@"Duplicates Deleted");
+            btnDelete.Visible = false;
+        }
     }
 }
