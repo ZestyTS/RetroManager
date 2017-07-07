@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -11,9 +12,19 @@ namespace RetroManager
     public partial class DuplicateRemover : Form
     {
         private ArrayList _deleteList;
-        public DuplicateRemover()
+        public DuplicateRemover(bool region=false)
         {
             InitializeComponent();
+            if (region) return;
+
+            Name = "Revision Duplicate Remover";
+            lbRegions.Visible = false;
+            txtRegions.Visible = false;
+            lbDirectory.Location = new Point(lbDirectory.Location.X, lbDirectory.Location.Y - 53);
+            txtDirectory.Location = new Point(txtDirectory.Location.X, txtDirectory.Location.Y - 53);
+            btnBrowse.Location = new Point(btnBrowse.Location.X, btnBrowse.Location.Y-53);
+            btnAnalyze.Location = new Point(btnAnalyze.Location.X, btnAnalyze.Location.Y - 53);
+            btnDelete.Location = new Point(btnDelete.Location.X, btnDelete.Location.Y-53);
         }
 
         private void BtnSubmit_Click(object sender, EventArgs e)
@@ -136,7 +147,7 @@ namespace RetroManager
         }
 
         private void DuplicateRemover_Load(object sender, EventArgs e)
-        {
+        { 
             ttRegions.IsBalloon = true;
             ttDirectory.IsBalloon = true;
             ttRegions.SetToolTip(lbRegions, "Write the priority of certain regions, whatever is not written will fall under the same priority level.\nExample: (USA), (Europe), (Japan)\nKeep in mind that some regions might be written as [U] instead.");

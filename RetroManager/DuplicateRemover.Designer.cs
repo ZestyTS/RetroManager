@@ -44,7 +44,7 @@
             // 
             this.txtRegions.Location = new System.Drawing.Point(12, 44);
             this.txtRegions.Name = "txtRegions";
-            this.txtRegions.Size = new System.Drawing.Size(260, 20);
+            this.txtRegions.Size = new System.Drawing.Size(327, 20);
             this.txtRegions.TabIndex = 0;
             // 
             // lbRegions
@@ -79,12 +79,12 @@
             // 
             this.txtDirectory.Location = new System.Drawing.Point(12, 97);
             this.txtDirectory.Name = "txtDirectory";
-            this.txtDirectory.Size = new System.Drawing.Size(193, 20);
+            this.txtDirectory.Size = new System.Drawing.Size(260, 20);
             this.txtDirectory.TabIndex = 5;
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(211, 97);
+            this.btnBrowse.Location = new System.Drawing.Point(278, 96);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(61, 20);
             this.btnBrowse.TabIndex = 6;
@@ -95,7 +95,7 @@
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(130, 143);
+            this.btnDelete.Location = new System.Drawing.Point(197, 143);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 7;
@@ -107,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 196);
+            this.ClientSize = new System.Drawing.Size(351, 196);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtDirectory);
@@ -116,7 +116,7 @@
             this.Controls.Add(this.lbRegions);
             this.Controls.Add(this.txtRegions);
             this.Name = "DuplicateRemover";
-            this.Text = "DuplicateRemover";
+            this.Text = "Region Duplicate Remover";
             this.Load += new System.EventHandler(this.DuplicateRemover_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
