@@ -11,13 +11,16 @@ namespace RetroManager
 {
     public partial class DuplicateRemover : Form
     {
+        private bool _revision;
         private ArrayList _deleteList;
-        public DuplicateRemover(bool region=false)
+        public DuplicateRemover(bool revision=false)
         {
             InitializeComponent();
-            if (region) return;
+            _revision = revision;
+            if (!revision) return;
 
             Name = "Revision Duplicate Remover";
+            Size = new Size(Width, Height-53);
             lbRegions.Visible = false;
             txtRegions.Visible = false;
             lbDirectory.Location = new Point(lbDirectory.Location.X, lbDirectory.Location.Y - 53);
@@ -45,7 +48,20 @@ namespace RetroManager
             }
 
             var files = Directory.GetFiles(reader, "*.*", SearchOption.AllDirectories);
-            var priority = txtRegions.Text.Replace(" ", string.Empty).Split(',').ToList();
+            var priority = new List<string>();
+
+            if (_revision)
+            {
+                var alphabet = new[]
+                {
+                    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+                    "U", "V", "W", "X", "Y", "Z"
+                }.Reverse();
+                priority.AddRange(alphabet);
+            }
+            else
+                priority = txtRegions.Text.Replace(" ", string.Empty).Split(',').ToList();
+
             var regionMap = new Dictionary<string, ArrayList>();
             var regex = new Regex(@"\s*?(?:\(.*?\)|\[.*?\]|\{.*?\})");
 
@@ -57,9 +73,14 @@ namespace RetroManager
                 region = region.Trim();
 
                 if (regionMap.ContainsKey(title))
-                    regionMap[title].Add(region);
+                {
+                    if (!_revision)
+                        regionMap[title].Add(region);
+                    else if (region.Contains("Rev"))
+                        regionMap[title].Add(region);
+                }
                 else
-                    regionMap[title] = new ArrayList { region };
+                    regionMap[title] = new ArrayList {region};
             }
 
             foreach (var file in files)
@@ -70,6 +91,13 @@ namespace RetroManager
 
                 if (regionMap[title].Count < 2)
                     continue;
+
+                if (region.Contains("Rev"))
+                {
+                    region = region.Substring(region.IndexOf("(R"));
+
+                    region = region.Any(char.IsDigit) ? priority[Convert.ToInt32(new string(region.Where(char.IsDigit).ToArray())) - 1] : region.Replace("(", "").Replace(")", "").Last().ToString();
+                }
 
                 var number = priority.IndexOf(region);
 
@@ -82,11 +110,21 @@ namespace RetroManager
                 var list = new ArrayList();
                 foreach (string rank in regionMap[title])
                 {
-                    if (!(priority.IndexOf(rank) < 0))
-                        list.Add(priority.IndexOf(rank));
+                    var temp = rank;
+                    if (_revision && rank.Contains("Rev"))
+                    {
+                        temp = rank.Substring(rank.IndexOf("Rev"));
+                        temp = temp.Any(char.IsDigit) ? priority[Convert.ToInt32(new string(temp.Where(char.IsDigit).ToArray())) - 1] : temp.Replace("(", "").Replace(")", "").Last().ToString();
+
+                    }
+                    if (!(priority.IndexOf(temp) < 0))
+                        list.Add(priority.IndexOf(temp));
                 }
 
                 list.Sort();
+
+                if (_revision)
+                    list.Reverse();
 
                 if (list.IndexOf(number) != 0)
                 {
