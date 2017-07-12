@@ -32,6 +32,11 @@ namespace RetroManager
 
         private void BtnSubmit_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtRegions.Text) && !_revision)
+            {
+                MessageBox.Show(@"Revision field cannot be empty");
+                return;
+            }
             var reader = txtDirectory.Text;
             if (!RedudantHelper.DirectoryCheck(reader)) return;
 
