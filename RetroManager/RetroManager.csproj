@@ -66,6 +66,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedudantHelper.cs" />
+    <Compile Include="RootFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RootFolder.Designer.cs">
+      <DependentUpon>RootFolder.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CompressRom.resx">
       <DependentUpon>CompressRom.cs</DependentUpon>
     </EmbeddedResource>
@@ -84,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RootFolder.resx">
+      <DependentUpon>RootFolder.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

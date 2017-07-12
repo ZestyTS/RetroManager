@@ -32,6 +32,7 @@
             this.txtDirectory = new System.Windows.Forms.TextBox();
             this.lbDirectory = new System.Windows.Forms.Label();
             this.btnMove = new System.Windows.Forms.Button();
+            this.cbRename = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -62,18 +63,30 @@
             // 
             // btnMove
             // 
-            this.btnMove.Location = new System.Drawing.Point(12, 107);
+            this.btnMove.Location = new System.Drawing.Point(15, 127);
             this.btnMove.Name = "btnMove";
             this.btnMove.Size = new System.Drawing.Size(75, 23);
             this.btnMove.TabIndex = 10;
             this.btnMove.Text = "Move";
             this.btnMove.UseVisualStyleBackColor = true;
+            this.btnMove.Click += new System.EventHandler(this.BtnMove_Click);
+            // 
+            // cbRename
+            // 
+            this.cbRename.AutoSize = true;
+            this.cbRename.Location = new System.Drawing.Point(15, 95);
+            this.cbRename.Name = "cbRename";
+            this.cbRename.Size = new System.Drawing.Size(129, 17);
+            this.cbRename.TabIndex = 11;
+            this.cbRename.Text = "Rename File to Folder";
+            this.cbRename.UseVisualStyleBackColor = true;
             // 
             // RootFolder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(351, 261);
+            this.ClientSize = new System.Drawing.Size(351, 167);
+            this.Controls.Add(this.cbRename);
             this.Controls.Add(this.btnMove);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtDirectory);
@@ -91,5 +104,6 @@
         private System.Windows.Forms.TextBox txtDirectory;
         private System.Windows.Forms.Label lbDirectory;
         private System.Windows.Forms.Button btnMove;
+        private System.Windows.Forms.CheckBox cbRename;
     }
 }
