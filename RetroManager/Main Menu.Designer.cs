@@ -31,7 +31,7 @@
             this.btnRegion = new System.Windows.Forms.Button();
             this.btnRevision = new System.Windows.Forms.Button();
             this.btnCompress = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnFolderMove = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnRegion
@@ -64,21 +64,22 @@
             this.btnCompress.UseVisualStyleBackColor = true;
             this.btnCompress.Click += new System.EventHandler(this.BtnCompress_Click);
             // 
-            // button2
+            // btnFolderMove
             // 
-            this.button2.Location = new System.Drawing.Point(12, 155);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(229, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Move Roms to Root Folder";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnFolderMove.Location = new System.Drawing.Point(12, 155);
+            this.btnFolderMove.Name = "btnFolderMove";
+            this.btnFolderMove.Size = new System.Drawing.Size(229, 23);
+            this.btnFolderMove.TabIndex = 3;
+            this.btnFolderMove.Text = "Move Roms to Root Folder";
+            this.btnFolderMove.UseVisualStyleBackColor = true;
+            this.btnFolderMove.Click += new System.EventHandler(this.BtnFolderMove_Click);
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(253, 192);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnFolderMove);
             this.Controls.Add(this.btnCompress);
             this.Controls.Add(this.btnRevision);
             this.Controls.Add(this.btnRegion);
@@ -93,7 +94,7 @@
         private System.Windows.Forms.Button btnRegion;
         private System.Windows.Forms.Button btnRevision;
         private System.Windows.Forms.Button btnCompress;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnFolderMove;
     }
 }
 

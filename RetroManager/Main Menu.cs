@@ -27,5 +27,11 @@ namespace RetroManager
             var cr = new CompressRom();
             cr.Show();
         }
+
+        private void BtnFolderMove_Click(object sender, EventArgs e)
+        {
+            var fm = new RootFolder();
+            fm.Show();
+        }
     }
 }
