@@ -130,6 +130,7 @@ namespace RetroManager
             if (_deleteList.Count > 0)
             {
                 RedudantHelper.FileMaker(_deleteList, "RetroManagerDuplicates");
+                btnDelete.Enabled = true;
             }
             else
             {
