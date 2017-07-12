@@ -154,13 +154,7 @@ namespace RetroManager
 
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
-            using (var folderDialog = new FolderBrowserDialog())
-            {
-                var result = folderDialog.ShowDialog();
-
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
-                    txtDirectory.Text = folderDialog.SelectedPath;
-            }
+            txtDirectory.Text = RedudantHelper.Browse(txtDirectory.Text);
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)

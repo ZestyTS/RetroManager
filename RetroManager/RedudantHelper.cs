@@ -20,5 +20,18 @@ namespace RetroManager
             }
             return true;
         }
+
+        public static string Browse(string path)
+        {
+            using (var folderDialog = new FolderBrowserDialog())
+            {
+                var result = folderDialog.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
+                    return folderDialog.SelectedPath;
+                
+                return path;
+            }
+        }
     }
 }
