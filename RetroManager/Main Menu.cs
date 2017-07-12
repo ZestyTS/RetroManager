@@ -21,5 +21,11 @@ namespace RetroManager
             var dr = new DuplicateRemover(true);
             dr.Show();
         }
+
+        private void BtnCompress_Click(object sender, EventArgs e)
+        {
+            var cr = new CompressRom();
+            cr.Show();
+        }
     }
 }

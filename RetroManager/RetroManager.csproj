@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompressRom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompressRom.Designer.cs">
+      <DependentUpon>CompressRom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +65,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedudantHelper.cs" />
+    <EmbeddedResource Include="CompressRom.resx">
+      <DependentUpon>CompressRom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DuplicateRemover.resx">
       <DependentUpon>DuplicateRemover.cs</DependentUpon>
     </EmbeddedResource>
