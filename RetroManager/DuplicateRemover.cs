@@ -32,20 +32,10 @@ namespace RetroManager
 
         private void BtnSubmit_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtDirectory.Text))
-            {
-                MessageBox.Show(@"Directory field can not be empty");
-                return;
-            }
             var reader = txtDirectory.Text;
-            var directorycheck = Directory.Exists(reader);
-            _deleteList = new ArrayList();
+            if (!RedudantHelper.DirectoryCheck(reader)) return;
 
-            if (!directorycheck)
-            {
-                MessageBox.Show(@"Please enter a valid directory.");
-                return;
-            }
+            _deleteList = new ArrayList();
 
             var files = Directory.GetFiles(reader, "*.*", SearchOption.AllDirectories);
             var priority = new List<string>();
@@ -136,7 +126,7 @@ namespace RetroManager
             {
                 var filename = "RetroManagerDuplicates";
                 var path = AppDomain.CurrentDomain.BaseDirectory;
-                var duplicatefile = Directory.GetFiles(path, "RetroManagerDuplicates*.txt");
+                var duplicatefile = Directory.GetFiles(path, filename + "*.txt");
                 
                 if (!(duplicatefile == null || duplicatefile.Length == 0))
                 {
