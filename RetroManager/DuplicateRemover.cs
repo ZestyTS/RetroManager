@@ -124,27 +124,7 @@ namespace RetroManager
 
             if (_deleteList.Count > 0)
             {
-                var filename = "RetroManagerDuplicates";
-                var path = AppDomain.CurrentDomain.BaseDirectory;
-                var duplicatefile = Directory.GetFiles(path, filename + "*.txt");
-                
-                if (!(duplicatefile == null || duplicatefile.Length == 0))
-                {
-                    duplicatefile = duplicatefile.OrderByDescending(c => c).ToArray();
-                    var num = new string(duplicatefile[0].Where(char.IsDigit).ToArray());
-
-                    filename += string.IsNullOrWhiteSpace(num) ? "1" : (Convert.ToInt16(num) + 1) + "";
-                }
-
-                filename += ".txt";
-                var filepath = path + filename;
-                using (var sw = new StreamWriter(filepath))
-                {
-                    foreach (string w in _deleteList)
-                        sw.WriteLine(w);
-                }
-                System.Diagnostics.Process.Start(filepath);
-                btnDelete.Enabled = true;
+                RedudantHelper.FileMaker(_deleteList, "RetroManagerDuplicates");
             }
             else
             {
