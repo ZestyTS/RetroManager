@@ -1,5 +1,5 @@
 # RetroManager
-A tool made for Windows machines to help manage their roms, specifically made for RetroPie
+A tool made for Windows machines to help manage roms, specifically made for RetroPie.
 
 ## Execution
 Take the EXE and drop it anywhere on your computer, as long as it can reach the directory of your roms, then you're good to go.
