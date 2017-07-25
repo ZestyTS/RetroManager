@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -10,12 +12,19 @@ namespace RetroManager
 {
     public partial class CompressRom : Form
     {
+        private readonly BackgroundWorker _bw = new BackgroundWorker();
         public CompressRom()
         {
             InitializeComponent();
+
+            _bw.WorkerReportsProgress = true;
+            _bw.WorkerSupportsCancellation = true;
+            _bw.DoWork += BtnStart_Work;
+            _bw.ProgressChanged += ProgressUpdate;
+            _bw.RunWorkerCompleted += WorkerCompleted;
         }
 
-        private void BtnStart_Click(object sender, EventArgs e)
+        private void BtnStart_Work(object sender, EventArgs e)
         {
             const string sixfour = @"C:\Program Files\7-Zip\7z.exe";
             const string threetwo = @"C:\Program Files (x86)\7-Zip\7z.exe";
@@ -85,19 +94,55 @@ namespace RetroManager
             {
                 emulators.Add(c.Text.Replace(" ", string.Empty).ToLower());
             }
-
-            foreach (string emu in emulators)
-            foreach (var ext in extensions[emu])
-            {
-                var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
-                foreach (var rom in roms)
+            using (var gr = pb.CreateGraphics())
+            { 
+                foreach (string emu in emulators)
+                foreach (var ext in extensions[emu])
                 {
-                    p.Arguments = "a -tzip -mx9 -mm=Deflate64 " + $@"""{Path.ChangeExtension(rom, ".zip")}""" + " " + $@"""{rom}""";
-                    var x = Process.Start(p);
-                    x.WaitForExit();
+                    var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
+                    var i = 0;
+                    foreach (var rom in roms)
+                    {
+                        p.Arguments = "a -tzip -mx9 -mm=Deflate64 " + $@"""{Path.ChangeExtension(rom, ".zip")}""" +
+                                      " " + $@"""{rom}""";
+                        var x = Process.Start(p);
+                        x.WaitForExit();
+                        var percentage = (i + 1) * 100 / roms.Length;
+                        i++;
+                        _bw.ReportProgress(percentage);
+                    }
                 }
             }
+        }
 
+        private void BtnStart_Click(object sender, EventArgs e)
+        {
+            if (_bw.IsBusy)
+                return;
+
+            btnStart.Enabled = false;
+            pb.Visible = true;
+            _bw.RunWorkerAsync();
+        }
+
+        private void ProgressUpdate(object sender, ProgressChangedEventArgs e)
+        {
+            pb.Value = e.ProgressPercentage;
+        }
+
+        private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(@"Something went wrong\n" + @"Error: " + e.Error.Message + @": " + e.Error.InnerException);
+            }
+            else
+            {
+                MessageBox.Show(@"Zipping Complete!");
+            }
+            pb.Value = 0;
+            pb.Visible = false;
+            btnStart.Enabled = true;
         }
 
         private void BtnBrowse_Click(object sender, EventArgs e)

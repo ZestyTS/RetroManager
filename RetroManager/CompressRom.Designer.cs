@@ -57,6 +57,7 @@
             this.ttef = new System.Windows.Forms.ToolTip(this.components);
             this.tte = new System.Windows.Forms.ToolTip(this.components);
             this.lbEmulator = new System.Windows.Forms.Label();
+            this.pb = new System.Windows.Forms.ProgressBar();
             this.gbEmulator.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -322,11 +323,20 @@
             this.lbEmulator.TabIndex = 14;
             this.lbEmulator.Text = "Emulators";
             // 
+            // pb
+            // 
+            this.pb.Location = new System.Drawing.Point(133, 273);
+            this.pb.Name = "pb";
+            this.pb.Size = new System.Drawing.Size(203, 46);
+            this.pb.TabIndex = 14;
+            this.pb.Visible = false;
+            // 
             // CompressRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(354, 335);
+            this.Controls.Add(this.pb);
             this.Controls.Add(this.gbEmulator);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.cbExtract);
@@ -373,5 +383,6 @@
         private System.Windows.Forms.ToolTip ttef;
         private System.Windows.Forms.ToolTip tte;
         private System.Windows.Forms.Label lbEmulator;
+        private System.Windows.Forms.ProgressBar pb;
     }
 }
