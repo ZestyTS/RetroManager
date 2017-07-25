@@ -61,5 +61,14 @@ namespace RetroManager
             }
             System.Diagnostics.Process.Start(filepath);
         }
+
+		public static bool isUnixBased
+		{
+			get
+			{
+				int p = (int)Environment.OSVersion.Platform;
+				return (p == 4) || (p == 6) || (p == 128);
+			}
+		}
     }
 }
