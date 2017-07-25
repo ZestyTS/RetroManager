@@ -109,9 +109,8 @@ namespace RetroManager
 
             var emulators = new ArrayList();
             foreach (var c in gbEmulator.Controls.OfType<CheckBox>().Where(x => x.Checked))
-            {
                 emulators.Add(c.Text.Replace(" ", string.Empty).ToLower());
-            }
+
             foreach (string emu in emulators)
             foreach (var ext in extensions[emu])
             {
@@ -119,12 +118,14 @@ namespace RetroManager
                 var i = 0;
                 foreach (var rom in roms)
                 {
-                        
-                    if (!RedudantHelper.isUnixBased) {
+                    if (!RedudantHelper.isUnixBased)
+                    {
 						p.Arguments = "a -tzip -mx9 -mm=Deflate64 " + $@"""{Path.ChangeExtension(rom, ".zip")}""" +
 							" " + $@"""{rom}""";	
-                    } else {
-                        string relativeRom = rom.Replace(reader +"/", null);
+                    }
+                    else
+                    {
+                        var relativeRom = rom.Replace(reader +"/", null);
                         p.WorkingDirectory = reader;
                         p.FileName = "zip";
                         p.Arguments = " -X -9 " + $@"""{Path.ChangeExtension(relativeRom, ".zip")}""" +
