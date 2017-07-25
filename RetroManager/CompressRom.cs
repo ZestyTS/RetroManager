@@ -50,6 +50,12 @@ namespace RetroManager
                 var extract = Directory.GetFiles(reader, "*.zip", SearchOption.AllDirectories);
                 foreach (var rom in extract)
                 {
+
+                    /*  var extraction = Path.GetDirectoryName(rom) + @"\Compress-RetroManager";
+                        if (!Directory.Exists(extraction))
+                            Directory.CreateDirectory(extraction);
+                            p.Arguments = "x " + rom + " -aoa -o" + extraction;
+                     */
                     p.Arguments = "e " + rom;
                     var x = Process.Start(p);
                     x.WaitForExit();
@@ -80,7 +86,7 @@ namespace RetroManager
                 };
 
             var emulators = new ArrayList();
-            foreach (var c in groupBox1.Controls.OfType<CheckBox>().Where(x => x.Checked))
+            foreach (var c in gbEmulator.Controls.OfType<CheckBox>().Where(x => x.Checked))
             {
                 emulators.Add(c.Text.Replace(" ", string.Empty).ToLower());
             }
@@ -102,6 +108,17 @@ namespace RetroManager
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
             txtDirectory.Text = RedudantHelper.Browse(txtDirectory.Text);
+        }
+
+        private void CompressRom_Load(object sender, EventArgs e)
+        {
+            ttDirectory.IsBalloon = true;
+            ttef.IsBalloon = true;
+            tte.IsBalloon = true;
+            tte.SetToolTip(lbEmulator, "These systems have at least one emulator that supports zip files.");
+            ttDirectory.SetToolTip(lbDirectory, "Put the root directory of the roms that will be zip'd.");
+            ttef.SetToolTip(cbExtract,
+                "Checking this will make it so files already ZIP'd will be extracted first to be zip'd up using 7-Zip's algorithm.");
         }
     }
 }

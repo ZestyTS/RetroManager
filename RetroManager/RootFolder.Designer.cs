@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtDirectory = new System.Windows.Forms.TextBox();
             this.lbDirectory = new System.Windows.Forms.Label();
             this.btnMove = new System.Windows.Forms.Button();
             this.cbRename = new System.Windows.Forms.CheckBox();
+            this.ttDirectory = new System.Windows.Forms.ToolTip(this.components);
+            this.ttR = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -93,6 +96,7 @@
             this.Controls.Add(this.lbDirectory);
             this.Name = "RootFolder";
             this.Text = "RootFolder";
+            this.Load += new System.EventHandler(this.RootFolder_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,5 +109,7 @@
         private System.Windows.Forms.Label lbDirectory;
         private System.Windows.Forms.Button btnMove;
         private System.Windows.Forms.CheckBox cbRename;
+        private System.Windows.Forms.ToolTip ttDirectory;
+        private System.Windows.Forms.ToolTip ttR;
     }
 }

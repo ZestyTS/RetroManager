@@ -55,5 +55,14 @@ namespace RetroManager
 
             RedudantHelper.FileMaker(fail, "MoveToRootFolder");
         }
+
+        private void RootFolder_Load(object sender, EventArgs e)
+        {
+            ttDirectory.IsBalloon = true;
+            ttR.IsBalloon = true;
+            ttR.SetToolTip(cbRename,
+                "Files in subdirectories will have their name be changed to the folder they were in before being moved.");
+            ttDirectory.SetToolTip(lbDirectory, "Put the root directory of where the roms will be moved to.");
+        }
     }
 }

@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtDirectory = new System.Windows.Forms.TextBox();
             this.lbDirectory = new System.Windows.Forms.Label();
             this.cbExtract = new System.Windows.Forms.CheckBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.cbn64 = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbEmulator = new System.Windows.Forms.GroupBox();
             this.cbgg = new System.Windows.Forms.CheckBox();
             this.cbpc = new System.Windows.Forms.CheckBox();
             this.cbngp = new System.Windows.Forms.CheckBox();
@@ -52,7 +53,11 @@
             this.cbgba = new System.Windows.Forms.CheckBox();
             this.cbSnes = new System.Windows.Forms.CheckBox();
             this.cbNes = new System.Windows.Forms.CheckBox();
-            this.groupBox1.SuspendLayout();
+            this.ttDirectory = new System.Windows.Forms.ToolTip(this.components);
+            this.ttef = new System.Windows.Forms.ToolTip(this.components);
+            this.tte = new System.Windows.Forms.ToolTip(this.components);
+            this.lbEmulator = new System.Windows.Forms.Label();
+            this.gbEmulator.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -111,32 +116,32 @@
             this.cbn64.Text = "N64";
             this.cbn64.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // gbEmulator
             // 
-            this.groupBox1.Controls.Add(this.cbgg);
-            this.groupBox1.Controls.Add(this.cbpc);
-            this.groupBox1.Controls.Add(this.cbngp);
-            this.groupBox1.Controls.Add(this.cbz);
-            this.groupBox1.Controls.Add(this.cbngc);
-            this.groupBox1.Controls.Add(this.cblynx);
-            this.groupBox1.Controls.Add(this.cbatari);
-            this.groupBox1.Controls.Add(this.cbms);
-            this.groupBox1.Controls.Add(this.cbds);
-            this.groupBox1.Controls.Add(this.cb32x);
-            this.groupBox1.Controls.Add(this.cbsg);
-            this.groupBox1.Controls.Add(this.cbgen);
-            this.groupBox1.Controls.Add(this.cbgbc);
-            this.groupBox1.Controls.Add(this.cbgb);
-            this.groupBox1.Controls.Add(this.cbgba);
-            this.groupBox1.Controls.Add(this.cbSnes);
-            this.groupBox1.Controls.Add(this.cbNes);
-            this.groupBox1.Controls.Add(this.cbn64);
-            this.groupBox1.Location = new System.Drawing.Point(15, 74);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(327, 183);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Emulators";
+            this.gbEmulator.Controls.Add(this.lbEmulator);
+            this.gbEmulator.Controls.Add(this.cbgg);
+            this.gbEmulator.Controls.Add(this.cbpc);
+            this.gbEmulator.Controls.Add(this.cbngp);
+            this.gbEmulator.Controls.Add(this.cbz);
+            this.gbEmulator.Controls.Add(this.cbngc);
+            this.gbEmulator.Controls.Add(this.cblynx);
+            this.gbEmulator.Controls.Add(this.cbatari);
+            this.gbEmulator.Controls.Add(this.cbms);
+            this.gbEmulator.Controls.Add(this.cbds);
+            this.gbEmulator.Controls.Add(this.cb32x);
+            this.gbEmulator.Controls.Add(this.cbsg);
+            this.gbEmulator.Controls.Add(this.cbgen);
+            this.gbEmulator.Controls.Add(this.cbgbc);
+            this.gbEmulator.Controls.Add(this.cbgb);
+            this.gbEmulator.Controls.Add(this.cbgba);
+            this.gbEmulator.Controls.Add(this.cbSnes);
+            this.gbEmulator.Controls.Add(this.cbNes);
+            this.gbEmulator.Controls.Add(this.cbn64);
+            this.gbEmulator.Location = new System.Drawing.Point(15, 74);
+            this.gbEmulator.Name = "gbEmulator";
+            this.gbEmulator.Size = new System.Drawing.Size(327, 183);
+            this.gbEmulator.TabIndex = 13;
+            this.gbEmulator.TabStop = false;
             // 
             // cbgg
             // 
@@ -308,12 +313,21 @@
             this.cbNes.Text = "NES";
             this.cbNes.UseVisualStyleBackColor = true;
             // 
+            // lbEmulator
+            // 
+            this.lbEmulator.AutoSize = true;
+            this.lbEmulator.Location = new System.Drawing.Point(6, 0);
+            this.lbEmulator.Name = "lbEmulator";
+            this.lbEmulator.Size = new System.Drawing.Size(53, 13);
+            this.lbEmulator.TabIndex = 14;
+            this.lbEmulator.Text = "Emulators";
+            // 
             // CompressRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(354, 335);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbEmulator);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.cbExtract);
             this.Controls.Add(this.btnBrowse);
@@ -321,8 +335,9 @@
             this.Controls.Add(this.lbDirectory);
             this.Name = "CompressRom";
             this.Text = "CompressRom";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Load += new System.EventHandler(this.CompressRom_Load);
+            this.gbEmulator.ResumeLayout(false);
+            this.gbEmulator.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -336,7 +351,7 @@
         private System.Windows.Forms.CheckBox cbExtract;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.CheckBox cbn64;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbEmulator;
         private System.Windows.Forms.CheckBox cbSnes;
         private System.Windows.Forms.CheckBox cbNes;
         private System.Windows.Forms.CheckBox cbds;
@@ -354,5 +369,9 @@
         private System.Windows.Forms.CheckBox cblynx;
         private System.Windows.Forms.CheckBox cbatari;
         private System.Windows.Forms.CheckBox cbms;
+        private System.Windows.Forms.ToolTip ttDirectory;
+        private System.Windows.Forms.ToolTip ttef;
+        private System.Windows.Forms.ToolTip tte;
+        private System.Windows.Forms.Label lbEmulator;
     }
 }
