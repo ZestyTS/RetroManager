@@ -19,7 +19,7 @@ namespace RetroManager
             _revision = revision;
             if (!revision) return;
 
-            Name = "Revision Duplicate Remover";
+            Text = @"Revision Duplicate Remover";
             Size = new Size(Width, Height-53);
             lbRegions.Visible = false;
             txtRegions.Visible = false;
