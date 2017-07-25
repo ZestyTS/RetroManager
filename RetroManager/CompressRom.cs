@@ -112,33 +112,30 @@ namespace RetroManager
             {
                 emulators.Add(c.Text.Replace(" ", string.Empty).ToLower());
             }
-            using (var gr = pb.CreateGraphics())
-            { 
-                foreach (string emu in emulators)
-                foreach (var ext in extensions[emu])
+            foreach (string emu in emulators)
+            foreach (var ext in extensions[emu])
+            {
+                var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
+                var i = 0;
+                foreach (var rom in roms)
                 {
-                    var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
-                    var i = 0;
-                    foreach (var rom in roms)
-                    {
                         
-                        if (!RedudantHelper.isUnixBased) {
-							p.Arguments = "a -tzip -mx9 -mm=Deflate64 " + $@"""{Path.ChangeExtension(rom, ".zip")}""" +
-							    " " + $@"""{rom}""";	
-                        } else {
-                            string relativeRom = rom.Replace(reader +"/", null);
-                            p.WorkingDirectory = reader;
-                            p.FileName = "zip";
-                            p.Arguments = " -X -9 " + $@"""{Path.ChangeExtension(relativeRom, ".zip")}""" +
-                                " " + $@"""{relativeRom}""";
-						}
+                    if (!RedudantHelper.isUnixBased) {
+						p.Arguments = "a -tzip -mx9 -mm=Deflate64 " + $@"""{Path.ChangeExtension(rom, ".zip")}""" +
+							" " + $@"""{rom}""";	
+                    } else {
+                        string relativeRom = rom.Replace(reader +"/", null);
+                        p.WorkingDirectory = reader;
+                        p.FileName = "zip";
+                        p.Arguments = " -X -9 " + $@"""{Path.ChangeExtension(relativeRom, ".zip")}""" +
+                            " " + $@"""{relativeRom}""";
+					}
 
-						var x = Process.Start(p);
-                        x.WaitForExit();
-                        var percentage = (i + 1) * 100 / roms.Length;
-                        i++;
-                        _bw.ReportProgress(percentage);
-                    }
+					var x = Process.Start(p);
+                    x.WaitForExit();
+                    var percentage = (i + 1) * 100 / roms.Length;
+                    i++;
+                    _bw.ReportProgress(percentage);
                 }
             }
         }
