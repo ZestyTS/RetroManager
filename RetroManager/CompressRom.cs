@@ -32,22 +32,19 @@ namespace RetroManager
 
             if (!RedudantHelper.DirectoryCheck(reader)) return;
 
-            if (File.Exists(sixfour))
-            {
-                process = sixfour;
-            }
-            else if (File.Exists(threetwo))
-            {
-                process = threetwo;
-            }
-            else if (RedudantHelper.isUnixBased)
-            {
+            if (RedudantHelper.isUnixBased)
                 process = "zip";
-            }
             else
             {
-                MessageBox.Show(@"7zip's location can not be determined");
-                return;
+                if (File.Exists(sixfour))
+                    process = sixfour;
+                else if (File.Exists(threetwo))
+                    process = threetwo;
+                else
+                {
+                    MessageBox.Show(@"7zip's location can not be determined");
+                    return;
+                }
             }
 
             var p = new ProcessStartInfo
@@ -75,7 +72,7 @@ namespace RetroManager
 					}
 					else
 					{
-						string relativeRom = rom.Replace(reader + "/", null);
+						var relativeRom = rom.Replace(reader + "/", null);
                         p.WorkingDirectory = reader;
                         p.FileName = "unzip";
 						p.Arguments = " -o " + $@"""{relativeRom}""";
