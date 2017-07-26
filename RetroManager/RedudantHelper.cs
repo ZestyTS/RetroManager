@@ -8,8 +8,11 @@ namespace RetroManager
 {
     public static class RedudantHelper
     {
-        public static bool DirectoryCheck(string text)
+        public static string defaultDirectory = null;
+
+		public static bool DirectoryCheck(string text)
         {
+
             if (string.IsNullOrWhiteSpace(text))
             {
                 MessageBox.Show(@"Directory field can not be empty");
@@ -20,9 +23,23 @@ namespace RetroManager
             {
                 MessageBox.Show(@"Please enter a valid directory.");
                 return false;
-            }
+            } 
+
+            setDefaultDirectory(text);
+
             return true;
         }
+
+        public static void setDefaultDirectory(string text)
+		{
+            RedudantHelper.defaultDirectory = text; 
+            return;
+		}
+
+		public static string getDefaultDirectory()
+		{
+			return RedudantHelper.defaultDirectory;
+		}
 
         public static string Browse(string path)
         {

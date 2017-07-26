@@ -27,9 +27,8 @@ namespace RetroManager
         {
             const string sixfour = @"C:\Program Files\7-Zip\7z.exe";
             const string threetwo = @"C:\Program Files (x86)\7-Zip\7z.exe";
-            var reader = txtDirectory.Text;
             string process;
-
+            string reader = txtDirectory.Text;
             if (!RedudantHelper.DirectoryCheck(reader)) return;
 
             if (RedudantHelper.isUnixBased)
@@ -173,11 +172,13 @@ namespace RetroManager
 
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
-            txtDirectory.Text = RedudantHelper.Browse(txtDirectory.Text);
+			txtDirectory.Text = RedudantHelper.Browse(txtDirectory.Text);
+			RedudantHelper.DirectoryCheck(txtDirectory.Text);
         }
 
         private void CompressRom_Load(object sender, EventArgs e)
         {
+			txtDirectory.Text = RedudantHelper.getDefaultDirectory();
             ttDirectory.IsBalloon = true;
             ttef.IsBalloon = true;
             tte.IsBalloon = true;
