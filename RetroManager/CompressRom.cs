@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,8 @@ using System.Windows.Forms;
 namespace RetroManager
 {
     public partial class CompressRom : Form
-    {
+	{
+
         private readonly BackgroundWorker _bw = new BackgroundWorker();
         public CompressRom()
         {
@@ -24,9 +25,9 @@ namespace RetroManager
         }
 
         private void BtnStart_Work(object sender, EventArgs e)
-        {
-            const string sixfour = @"C:\Program Files\7-Zip\7z.exe";
-            const string threetwo = @"C:\Program Files (x86)\7-Zip\7z.exe";
+		{
+		    const string sixfour = @"C:\Program Files\7-Zip\7z.exe";
+		    const string threetwo = @"C:\Program Files (x86)\7-Zip\7z.exe";
             string process;
             string reader = txtDirectory.Text;
             if (!RedudantHelper.DirectoryCheck(reader)) return;
@@ -41,7 +42,7 @@ namespace RetroManager
                     process = threetwo;
                 else
                 {
-                    MessageBox.Show(@"7zip's location can not be determined");
+                    MessageBox.Show(@"7zip's location could not be determined");
                     return;
                 }
             }
@@ -55,6 +56,7 @@ namespace RetroManager
             if (cbExtract.Checked)
             {
                 var extract = Directory.GetFiles(reader, "*.zip", SearchOption.AllDirectories);
+                string relativeRom;
 
                 foreach (var rom in extract)
                 {
@@ -71,15 +73,13 @@ namespace RetroManager
 					}
 					else
 					{
-						var relativeRom = rom.Replace(reader + "/", null);
+						relativeRom = rom.Replace(reader + "/", null);
                         p.WorkingDirectory = reader;
                         p.FileName = "unzip";
 						p.Arguments = " -o " + $@"""{relativeRom}""";
-
 					}
 					var x = Process.Start(p);
 					x.WaitForExit();
-
                 }
             }
 
@@ -115,6 +115,8 @@ namespace RetroManager
             {
                 var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
                 var i = 0;
+                string relativeRom;
+
                 foreach (var rom in roms)
                 {
                     if (!RedudantHelper.isUnixBased)
@@ -124,7 +126,7 @@ namespace RetroManager
                     }
                     else
                     {
-                        var relativeRom = rom.Replace(reader +"/", null);
+                        relativeRom = rom.Replace(reader +"/", null);
                         p.WorkingDirectory = reader;
                         p.FileName = "zip";
                         p.Arguments = " -X -9 " + $@"""{Path.ChangeExtension(relativeRom, ".zip")}""" +
@@ -163,7 +165,7 @@ namespace RetroManager
             }
             else
             {
-                MessageBox.Show(@"Zipping Complete!");
+                MessageBox.Show(@"Roms successfully compressed!");
             }
             pb.Value = 0;
             pb.Visible = false;
