@@ -36,6 +36,7 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.cbn64 = new System.Windows.Forms.CheckBox();
             this.gbEmulator = new System.Windows.Forms.GroupBox();
+            this.lbEmulator = new System.Windows.Forms.Label();
             this.cbgg = new System.Windows.Forms.CheckBox();
             this.cbpc = new System.Windows.Forms.CheckBox();
             this.cbngp = new System.Windows.Forms.CheckBox();
@@ -56,7 +57,6 @@
             this.ttDirectory = new System.Windows.Forms.ToolTip(this.components);
             this.ttef = new System.Windows.Forms.ToolTip(this.components);
             this.tte = new System.Windows.Forms.ToolTip(this.components);
-            this.lbEmulator = new System.Windows.Forms.Label();
             this.pb = new System.Windows.Forms.ProgressBar();
             this.gbEmulator.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +66,7 @@
             this.btnBrowse.Location = new System.Drawing.Point(281, 33);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(61, 20);
-            this.btnBrowse.TabIndex = 9;
+            this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.BtnBrowse_Click);
@@ -76,7 +76,7 @@
             this.txtDirectory.Location = new System.Drawing.Point(15, 34);
             this.txtDirectory.Name = "txtDirectory";
             this.txtDirectory.Size = new System.Drawing.Size(260, 20);
-            this.txtDirectory.TabIndex = 8;
+            this.txtDirectory.TabIndex = 1;
             // 
             // lbDirectory
             // 
@@ -93,7 +93,7 @@
             this.cbExtract.Location = new System.Drawing.Point(21, 273);
             this.cbExtract.Name = "cbExtract";
             this.cbExtract.Size = new System.Drawing.Size(81, 17);
-            this.cbExtract.TabIndex = 10;
+            this.cbExtract.TabIndex = 21;
             this.cbExtract.Text = "Extract First";
             this.cbExtract.UseVisualStyleBackColor = true;
             // 
@@ -102,7 +102,7 @@
             this.btnStart.Location = new System.Drawing.Point(15, 296);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
-            this.btnStart.TabIndex = 11;
+            this.btnStart.TabIndex = 22;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
@@ -113,7 +113,7 @@
             this.cbn64.Location = new System.Drawing.Point(6, 62);
             this.cbn64.Name = "cbn64";
             this.cbn64.Size = new System.Drawing.Size(46, 17);
-            this.cbn64.TabIndex = 12;
+            this.cbn64.TabIndex = 5;
             this.cbn64.Text = "N64";
             this.cbn64.UseVisualStyleBackColor = true;
             // 
@@ -144,13 +144,22 @@
             this.gbEmulator.TabIndex = 13;
             this.gbEmulator.TabStop = false;
             // 
+            // lbEmulator
+            // 
+            this.lbEmulator.AutoSize = true;
+            this.lbEmulator.Location = new System.Drawing.Point(6, 0);
+            this.lbEmulator.Name = "lbEmulator";
+            this.lbEmulator.Size = new System.Drawing.Size(53, 13);
+            this.lbEmulator.TabIndex = 14;
+            this.lbEmulator.Text = "Emulators";
+            // 
             // cbgg
             // 
             this.cbgg.AutoSize = true;
             this.cbgg.Location = new System.Drawing.Point(73, 108);
             this.cbgg.Name = "cbgg";
             this.cbgg.Size = new System.Drawing.Size(80, 17);
-            this.cbgg.TabIndex = 30;
+            this.cbgg.TabIndex = 14;
             this.cbgg.Text = "Game Gear";
             this.cbgg.UseVisualStyleBackColor = true;
             // 
@@ -160,7 +169,7 @@
             this.cbpc.Location = new System.Drawing.Point(237, 95);
             this.cbpc.Name = "cbpc";
             this.cbpc.Size = new System.Drawing.Size(84, 17);
-            this.cbpc.TabIndex = 29;
+            this.cbpc.TabIndex = 20;
             this.cbpc.Text = "PC Machine";
             this.cbpc.UseVisualStyleBackColor = true;
             // 
@@ -170,7 +179,7 @@
             this.cbngp.Location = new System.Drawing.Point(181, 131);
             this.cbngp.Name = "cbngp";
             this.cbngp.Size = new System.Drawing.Size(49, 17);
-            this.cbngp.TabIndex = 28;
+            this.cbngp.TabIndex = 17;
             this.cbngp.Text = "NGP";
             this.cbngp.UseVisualStyleBackColor = true;
             // 
@@ -180,7 +189,7 @@
             this.cbz.Location = new System.Drawing.Point(237, 72);
             this.cbz.Name = "cbz";
             this.cbz.Size = new System.Drawing.Size(77, 17);
-            this.cbz.TabIndex = 27;
+            this.cbz.TabIndex = 19;
             this.cbz.Text = "Z-Machine";
             this.cbz.UseVisualStyleBackColor = true;
             // 
@@ -190,7 +199,7 @@
             this.cbngc.Location = new System.Drawing.Point(181, 154);
             this.cbngc.Name = "cbngc";
             this.cbngc.Size = new System.Drawing.Size(49, 17);
-            this.cbngc.TabIndex = 26;
+            this.cbngc.TabIndex = 18;
             this.cbngc.Text = "NGC";
             this.cbngc.UseVisualStyleBackColor = true;
             // 
@@ -200,7 +209,7 @@
             this.cblynx.Location = new System.Drawing.Point(181, 39);
             this.cblynx.Name = "cblynx";
             this.cblynx.Size = new System.Drawing.Size(48, 17);
-            this.cblynx.TabIndex = 25;
+            this.cblynx.TabIndex = 16;
             this.cblynx.Text = "Lynx";
             this.cblynx.UseVisualStyleBackColor = true;
             // 
@@ -210,7 +219,7 @@
             this.cbatari.Location = new System.Drawing.Point(181, 16);
             this.cbatari.Name = "cbatari";
             this.cbatari.Size = new System.Drawing.Size(74, 17);
-            this.cbatari.TabIndex = 24;
+            this.cbatari.TabIndex = 15;
             this.cbatari.Text = "Atari 2600";
             this.cbatari.UseVisualStyleBackColor = true;
             // 
@@ -220,7 +229,7 @@
             this.cbms.Location = new System.Drawing.Point(73, 85);
             this.cbms.Name = "cbms";
             this.cbms.Size = new System.Drawing.Size(95, 17);
-            this.cbms.TabIndex = 22;
+            this.cbms.TabIndex = 13;
             this.cbms.Text = "Master System";
             this.cbms.UseVisualStyleBackColor = true;
             // 
@@ -230,7 +239,7 @@
             this.cbds.Location = new System.Drawing.Point(6, 154);
             this.cbds.Name = "cbds";
             this.cbds.Size = new System.Drawing.Size(41, 17);
-            this.cbds.TabIndex = 21;
+            this.cbds.TabIndex = 9;
             this.cbds.Text = "DS";
             this.cbds.UseVisualStyleBackColor = true;
             // 
@@ -240,7 +249,7 @@
             this.cb32x.Location = new System.Drawing.Point(73, 39);
             this.cb32x.Name = "cb32x";
             this.cb32x.Size = new System.Drawing.Size(45, 17);
-            this.cb32x.TabIndex = 20;
+            this.cb32x.TabIndex = 11;
             this.cb32x.Text = "32X";
             this.cb32x.UseVisualStyleBackColor = true;
             // 
@@ -250,7 +259,7 @@
             this.cbsg.Location = new System.Drawing.Point(73, 16);
             this.cbsg.Name = "cbsg";
             this.cbsg.Size = new System.Drawing.Size(68, 17);
-            this.cbsg.TabIndex = 19;
+            this.cbsg.TabIndex = 10;
             this.cbsg.Text = "SG-1000";
             this.cbsg.UseVisualStyleBackColor = true;
             // 
@@ -260,7 +269,7 @@
             this.cbgen.Location = new System.Drawing.Point(73, 62);
             this.cbgen.Name = "cbgen";
             this.cbgen.Size = new System.Drawing.Size(64, 17);
-            this.cbgen.TabIndex = 18;
+            this.cbgen.TabIndex = 12;
             this.cbgen.Text = "Genesis";
             this.cbgen.UseVisualStyleBackColor = true;
             // 
@@ -270,7 +279,7 @@
             this.cbgbc.Location = new System.Drawing.Point(6, 108);
             this.cbgbc.Name = "cbgbc";
             this.cbgbc.Size = new System.Drawing.Size(48, 17);
-            this.cbgbc.TabIndex = 17;
+            this.cbgbc.TabIndex = 7;
             this.cbgbc.Text = "GBC";
             this.cbgbc.UseVisualStyleBackColor = true;
             // 
@@ -280,7 +289,7 @@
             this.cbgb.Location = new System.Drawing.Point(6, 85);
             this.cbgb.Name = "cbgb";
             this.cbgb.Size = new System.Drawing.Size(41, 17);
-            this.cbgb.TabIndex = 16;
+            this.cbgb.TabIndex = 6;
             this.cbgb.Text = "GB";
             this.cbgb.UseVisualStyleBackColor = true;
             // 
@@ -290,7 +299,7 @@
             this.cbgba.Location = new System.Drawing.Point(6, 131);
             this.cbgba.Name = "cbgba";
             this.cbgba.Size = new System.Drawing.Size(48, 17);
-            this.cbgba.TabIndex = 15;
+            this.cbgba.TabIndex = 8;
             this.cbgba.Text = "GBA";
             this.cbgba.UseVisualStyleBackColor = true;
             // 
@@ -300,7 +309,7 @@
             this.cbSnes.Location = new System.Drawing.Point(6, 39);
             this.cbSnes.Name = "cbSnes";
             this.cbSnes.Size = new System.Drawing.Size(55, 17);
-            this.cbSnes.TabIndex = 14;
+            this.cbSnes.TabIndex = 4;
             this.cbSnes.Text = "SNES";
             this.cbSnes.UseVisualStyleBackColor = true;
             // 
@@ -310,18 +319,9 @@
             this.cbNes.Location = new System.Drawing.Point(6, 16);
             this.cbNes.Name = "cbNes";
             this.cbNes.Size = new System.Drawing.Size(48, 17);
-            this.cbNes.TabIndex = 13;
+            this.cbNes.TabIndex = 3;
             this.cbNes.Text = "NES";
             this.cbNes.UseVisualStyleBackColor = true;
-            // 
-            // lbEmulator
-            // 
-            this.lbEmulator.AutoSize = true;
-            this.lbEmulator.Location = new System.Drawing.Point(6, 0);
-            this.lbEmulator.Name = "lbEmulator";
-            this.lbEmulator.Size = new System.Drawing.Size(53, 13);
-            this.lbEmulator.TabIndex = 14;
-            this.lbEmulator.Text = "Emulators";
             // 
             // pb
             // 

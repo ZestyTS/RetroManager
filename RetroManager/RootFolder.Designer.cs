@@ -43,7 +43,7 @@
             this.btnBrowse.Location = new System.Drawing.Point(281, 40);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(61, 20);
-            this.btnBrowse.TabIndex = 9;
+            this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.BtnBrowse_Click);
@@ -53,7 +53,7 @@
             this.txtDirectory.Location = new System.Drawing.Point(15, 41);
             this.txtDirectory.Name = "txtDirectory";
             this.txtDirectory.Size = new System.Drawing.Size(260, 20);
-            this.txtDirectory.TabIndex = 8;
+            this.txtDirectory.TabIndex = 1;
             // 
             // lbDirectory
             // 
@@ -69,7 +69,7 @@
             this.btnMove.Location = new System.Drawing.Point(15, 127);
             this.btnMove.Name = "btnMove";
             this.btnMove.Size = new System.Drawing.Size(75, 23);
-            this.btnMove.TabIndex = 10;
+            this.btnMove.TabIndex = 4;
             this.btnMove.Text = "Move";
             this.btnMove.UseVisualStyleBackColor = true;
             this.btnMove.Click += new System.EventHandler(this.BtnMove_Click);
@@ -80,7 +80,7 @@
             this.cbRename.Location = new System.Drawing.Point(15, 95);
             this.cbRename.Name = "cbRename";
             this.cbRename.Size = new System.Drawing.Size(129, 17);
-            this.cbRename.TabIndex = 11;
+            this.cbRename.TabIndex = 3;
             this.cbRename.Text = "Rename File to Folder";
             this.cbRename.UseVisualStyleBackColor = true;
             // 

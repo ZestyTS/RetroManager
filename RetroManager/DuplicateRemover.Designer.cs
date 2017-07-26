@@ -61,7 +61,7 @@
             this.btnAnalyze.Location = new System.Drawing.Point(12, 143);
             this.btnAnalyze.Name = "btnAnalyze";
             this.btnAnalyze.Size = new System.Drawing.Size(75, 23);
-            this.btnAnalyze.TabIndex = 2;
+            this.btnAnalyze.TabIndex = 3;
             this.btnAnalyze.Text = "Analyze";
             this.btnAnalyze.UseVisualStyleBackColor = true;
             this.btnAnalyze.Click += new System.EventHandler(this.BtnSubmit_Click);
@@ -80,14 +80,14 @@
             this.txtDirectory.Location = new System.Drawing.Point(12, 97);
             this.txtDirectory.Name = "txtDirectory";
             this.txtDirectory.Size = new System.Drawing.Size(260, 20);
-            this.txtDirectory.TabIndex = 5;
+            this.txtDirectory.TabIndex = 1;
             // 
             // btnBrowse
             // 
             this.btnBrowse.Location = new System.Drawing.Point(278, 96);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(61, 20);
-            this.btnBrowse.TabIndex = 6;
+            this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.BtnBrowse_Click);
@@ -98,7 +98,7 @@
             this.btnDelete.Location = new System.Drawing.Point(197, 143);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 7;
+            this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
