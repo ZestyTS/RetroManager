@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,30 +56,24 @@ namespace RetroManager
             if (cbExtract.Checked)
             {
                 var extract = Directory.GetFiles(reader, "*.zip", SearchOption.AllDirectories);
-                string relativeRom;
 
                 foreach (var rom in extract)
                 {
+                    Compressor.DecompressFileLZMA(rom,"out");
 
-					/*  var extraction = Path.GetDirectoryName(rom) + @"\Compress-RetroManager";
-                        if (!Directory.Exists(extraction))
-                            Directory.CreateDirectory(extraction);
-                            p.Arguments = "x " + rom + " -aoa -o" + extraction;
-                     */
-
-					if (!RedudantHelper.isUnixBased)
-					{
-						p.Arguments = "e " + rom;
-					}
-					else
-					{
-						relativeRom = rom.Replace(reader + "/", null);
-                        p.WorkingDirectory = reader;
-                        p.FileName = "unzip";
-						p.Arguments = " -o " + $@"""{relativeRom}""";
-					}
-					var x = Process.Start(p);
-					x.WaitForExit();
+					//if (!RedudantHelper.isUnixBased)
+					//{
+					//	p.Arguments = "e " + rom;
+					//}
+					//else
+					//{
+					//	relativeRom = rom.Replace(reader + "/", null);
+     //                   p.WorkingDirectory = reader;
+     //                   p.FileName = "unzip";
+					//	p.Arguments = " -o " + $@"""{relativeRom}""";
+					//}
+					//var x = Process.Start(p);
+					//x.WaitForExit();
                 }
             }
 
@@ -115,26 +109,28 @@ namespace RetroManager
             {
                 var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
                 var i = 0;
-                string relativeRom;
+                //string relativeRom;
 
                 foreach (var rom in roms)
                 {
-                    if (!RedudantHelper.isUnixBased)
-                    {
-						p.Arguments = "a -tzip -mx9 -mm=Deflate64 " + $@"""{Path.ChangeExtension(rom, ".zip")}""" +
-							" " + $@"""{rom}""";	
-                    }
-                    else
-                    {
-                        relativeRom = rom.Replace(reader +"/", null);
-                        p.WorkingDirectory = reader;
-                        p.FileName = "zip";
-                        p.Arguments = " -X -9 " + $@"""{Path.ChangeExtension(relativeRom, ".zip")}""" +
-                            " " + $@"""{relativeRom}""";
-					}
+                        //               if (!RedudantHelper.isUnixBased)
+                        //               {
+                        //	p.Arguments = "a -tzip -mx9 -mm=Deflate64 " + $@"""{Path.ChangeExtension(rom, ".zip")}""" +
+                        //		" " + $@"""{rom}""";	
+                        //               }
+                        //               else
+                        //               {
+                        //                   relativeRom = rom.Replace(reader +"/", null);
+                        //                   p.WorkingDirectory = reader;
+                        //                   p.FileName = "zip";
+                        //                   p.Arguments = " -X -9 " + $@"""{Path.ChangeExtension(relativeRom, ".zip")}""" +
+                        //                       " " + $@"""{relativeRom}""";
+                        //}
 
-					var x = Process.Start(p);
-                    x.WaitForExit();
+                        //var x = Process.Start(p);
+                        //x.WaitForExit();
+                        Debug.WriteLine(rom);
+                    Compressor.CompressFileLZMA(rom, Path.ChangeExtension(rom, ".zip"));
                     var percentage = (i + 1) * 100 / roms.Length;
                     i++;
                     _bw.ReportProgress(percentage);
@@ -161,7 +157,7 @@ namespace RetroManager
         {
             if (e.Error != null)
             {
-                MessageBox.Show(@"Something went wrong\n" + @"Error: " + e.Error.Message + @": " + e.Error.InnerException);
+                MessageBox.Show(@"Something went wrong" + "\n" + @"Error: " + e.Error.Message + @": " + e.Error.InnerException);
             }
             else
             {
