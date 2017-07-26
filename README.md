@@ -7,11 +7,11 @@ A tool made for Windows machines to help manage roms, specifically made for Retr
 Take the EXE and drop it anywhere on your computer, as long as it can reach the directory of your roms, then you're good to go.
 
 ### Linux
-[Mono](http://www.mono-project.com/download/#download-lin) is required, sudo apt-get install mono-devel
+[Mono](http://www.mono-project.com/download/#download-lin) is required, sudo apt-get install mono-devel  
 Open terminal, use mono and call the exe "mono RetroManager.exe"
 
 ### Mac
-Try the same steps as Linux, if not then you might have to [download Mono a different way](http://www.mono-project.com/download/#download-mac)
+Try the same steps as Linux, if not then you might have to [download Mono a different way](http://www.mono-project.com/download/#download-mac)  
 
 ## Starting the Program 
 ### Main Menu
