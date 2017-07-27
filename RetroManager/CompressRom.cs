@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -129,8 +129,8 @@ namespace RetroManager
 
                         //var x = Process.Start(p);
                         //x.WaitForExit();
-                        Debug.WriteLine(rom);
-                    Compressor.CompressFileLZMA(rom, Path.ChangeExtension(rom, ".zip"));
+                        //Debug.WriteLine(rom);
+                    Compressor.CompressFileLZMA(rom, rom + ".zip");
                     var percentage = (i + 1) * 100 / roms.Length;
                     i++;
                     _bw.ReportProgress(percentage);
