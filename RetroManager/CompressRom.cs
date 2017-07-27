@@ -26,36 +26,16 @@ namespace RetroManager
 
         private void BtnStart_Work(object sender, EventArgs e)
 		{
-		    const string sixfour = @"C:\Program Files\7-Zip\7z.exe";
-		    const string threetwo = @"C:\Program Files (x86)\7-Zip\7z.exe";
-            string process;
             string reader = txtDirectory.Text;
             if (!RedudantHelper.DirectoryCheck(reader)) return;
-
-            if (RedudantHelper.isUnixBased)
-                process = "zip";
-            else
-            {
-                if (File.Exists(sixfour))
-                    process = sixfour;
-                else if (File.Exists(threetwo))
-                    process = threetwo;
-                else
-                {
-                    MessageBox.Show(@"7zip's location could not be determined");
-                    return;
-                }
-            }
-
-            var p = new ProcessStartInfo
-            {
-                WindowStyle = ProcessWindowStyle.Hidden,
-                FileName = process
-            };
+            var percentage = 0;
 
             if (cbExtract.Checked)
             {
-                var extract = Directory.GetFiles(reader, "*.zip", SearchOption.AllDirectories);
+                List<string> extract = new List<string>();
+				extract.AddRange(Directory.GetFiles(reader, "*.zip", SearchOption.AllDirectories));
+				extract.AddRange(Directory.GetFiles(reader, "*.7z", SearchOption.AllDirectories));
+                var i = 0;
 
                 foreach (var rom in extract)
                 {
@@ -64,9 +44,16 @@ namespace RetroManager
 					int extPos = rom.LastIndexOf(".", StringComparison.Ordinal);
 					if (extPos >= 0)
 						noExtRom = rom.Substring(0, extPos);
-                    
-					Compressor.DecompressFileLZMA(rom, noExtRom);
+
+					Compressor.DecompressFile(rom, reader);
+
+					percentage = (i + 1) * 100 / extract.Count;
+					i++;
+					_bw.ReportProgress(percentage);
                 }
+
+                extract.Clear();
+
             }
 
             var extensions =
@@ -80,7 +67,7 @@ namespace RetroManager
                     {"gba", new ArrayList {"gba"}},
                     {"ds", new ArrayList {"nds"}},
                     {"32x", new ArrayList {"32x", "smd", "bin", "md"}},
-                    {"genesis", new ArrayList {"smd", "bin", "md", "iso"}},
+                    {"genesis", new ArrayList {"smd", "bin", "md", "iso", "gen" }},
                     {"n64", new ArrayList {"z64", "n64", "v64"}},
                     {"mastersystem", new ArrayList {"sms"}},
                     {"atari2600", new ArrayList {"bin", "a26", "rom", "gz"}},
@@ -101,12 +88,11 @@ namespace RetroManager
             {
                 var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
                 var i = 0;
-                //string relativeRom;
 
                 foreach (var rom in roms)
                 {
-                    Compressor.CompressFileLZMA(rom, rom + ".zip");
-                    var percentage = (i + 1) * 100 / roms.Length;
+                    Compressor.CompressFile(rom, reader);
+                    percentage = (i + 1) * 100 / roms.Length;
                     i++;
                     _bw.ReportProgress(percentage);
                 }

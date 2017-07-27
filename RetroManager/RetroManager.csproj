@@ -44,6 +44,9 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="SharpCompress">
+      <HintPath>..\packages\SharpCompress.0.18.0\lib\net45\SharpCompress.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompressRom.cs">
@@ -119,6 +122,7 @@
     <Compile Include="7zip\Compress\RangeCoder\RangeCoder.cs" />
     <Compile Include="7zip\Compress\RangeCoder\RangeCoderBit.cs" />
     <Compile Include="7zip\Compress\RangeCoder\RangeCoderBitTree.cs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
