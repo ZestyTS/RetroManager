@@ -32,7 +32,7 @@ namespace RetroManager
             string reader = txtDirectory.Text;
             if (!RedudantHelper.DirectoryCheck(reader)) return;
 
-            if (RedudantHelper.isUnixBased)
+            if (RedudantHelper.IsUnixBased)
                 process = "zip";
             else
             {
@@ -56,7 +56,6 @@ namespace RetroManager
             if (cbExtract.Checked)
             {
                 var extract = Directory.GetFiles(reader, "*.zip", SearchOption.AllDirectories);
-                string relativeRom;
 
                 foreach (var rom in extract)
                 {
@@ -67,13 +66,13 @@ namespace RetroManager
                             p.Arguments = "x " + rom + " -aoa -o" + extraction;
                      */
 
-					if (!RedudantHelper.isUnixBased)
+					if (!RedudantHelper.IsUnixBased)
 					{
 						p.Arguments = "e " + rom;
 					}
 					else
 					{
-						relativeRom = rom.Replace(reader + "/", null);
+						var relativeRom = rom.Replace(reader + "/", null);
                         p.WorkingDirectory = reader;
                         p.FileName = "unzip";
 						p.Arguments = " -o " + $@"""{relativeRom}""";
@@ -115,18 +114,17 @@ namespace RetroManager
             {
                 var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
                 var i = 0;
-                string relativeRom;
 
                 foreach (var rom in roms)
                 {
-                    if (!RedudantHelper.isUnixBased)
+                    if (!RedudantHelper.IsUnixBased)
                     {
 						p.Arguments = "a -tzip -mx9 -mm=Deflate64 " + $@"""{Path.ChangeExtension(rom, ".zip")}""" +
 							" " + $@"""{rom}""";	
                     }
                     else
                     {
-                        relativeRom = rom.Replace(reader +"/", null);
+                        var relativeRom = rom.Replace(reader +"/", null);
                         p.WorkingDirectory = reader;
                         p.FileName = "zip";
                         p.Arguments = " -X -9 " + $@"""{Path.ChangeExtension(relativeRom, ".zip")}""" +
@@ -180,7 +178,7 @@ namespace RetroManager
 
         private void CompressRom_Load(object sender, EventArgs e)
         {
-			txtDirectory.Text = RedudantHelper.getDefaultDirectory();
+			txtDirectory.Text = RedudantHelper.GetDefaultDirectory();
             ttDirectory.IsBalloon = true;
             ttef.IsBalloon = true;
             tte.IsBalloon = true;

@@ -1,11 +1,14 @@
-﻿namespace RetroManager
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace RetroManager
 {
     partial class MainMenu
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -91,10 +94,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnRegion;
-        private System.Windows.Forms.Button btnRevision;
-        private System.Windows.Forms.Button btnCompress;
-        private System.Windows.Forms.Button btnFolderMove;
+        private Button btnRegion;
+        private Button btnRevision;
+        private Button btnCompress;
+        private Button btnFolderMove;
     }
 }
 
