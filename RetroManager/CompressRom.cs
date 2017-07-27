@@ -185,7 +185,7 @@ namespace RetroManager
             tte.SetToolTip(lbEmulator, "These systems have at least one emulator that supports zip files.");
             ttDirectory.SetToolTip(lbDirectory, "Put the root directory of the roms that will be zip'd.");
             ttef.SetToolTip(cbExtract,
-                "Checking this will make it so files already ZIP'd will be extracted first to be zip'd up using 7-Zip's algorithm.");
+                "Roms that are already zip'd up will be extracted and then zip'd up using this program's algorithm.\nThis is only to see if this program's algorithm can help you save some extra space.");
         }
     }
 }
