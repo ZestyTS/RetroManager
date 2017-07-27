@@ -59,21 +59,13 @@ namespace RetroManager
 
                 foreach (var rom in extract)
                 {
-                    Compressor.DecompressFileLZMA(rom,"out");
+                    string noExtRom = null;
 
-					//if (!RedudantHelper.isUnixBased)
-					//{
-					//	p.Arguments = "e " + rom;
-					//}
-					//else
-					//{
-					//	relativeRom = rom.Replace(reader + "/", null);
-     //                   p.WorkingDirectory = reader;
-     //                   p.FileName = "unzip";
-					//	p.Arguments = " -o " + $@"""{relativeRom}""";
-					//}
-					//var x = Process.Start(p);
-					//x.WaitForExit();
+					int extPos = rom.LastIndexOf(".", StringComparison.Ordinal);
+					if (extPos >= 0)
+						noExtRom = rom.Substring(0, extPos);
+                    
+					Compressor.DecompressFileLZMA(rom, noExtRom);
                 }
             }
 
@@ -113,23 +105,6 @@ namespace RetroManager
 
                 foreach (var rom in roms)
                 {
-                        //               if (!RedudantHelper.isUnixBased)
-                        //               {
-                        //	p.Arguments = "a -tzip -mx9 -mm=Deflate64 " + $@"""{Path.ChangeExtension(rom, ".zip")}""" +
-                        //		" " + $@"""{rom}""";	
-                        //               }
-                        //               else
-                        //               {
-                        //                   relativeRom = rom.Replace(reader +"/", null);
-                        //                   p.WorkingDirectory = reader;
-                        //                   p.FileName = "zip";
-                        //                   p.Arguments = " -X -9 " + $@"""{Path.ChangeExtension(relativeRom, ".zip")}""" +
-                        //                       " " + $@"""{relativeRom}""";
-                        //}
-
-                        //var x = Process.Start(p);
-                        //x.WaitForExit();
-                        //Debug.WriteLine(rom);
                     Compressor.CompressFileLZMA(rom, rom + ".zip");
                     var percentage = (i + 1) * 100 / roms.Length;
                     i++;

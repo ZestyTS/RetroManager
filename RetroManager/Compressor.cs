@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,12 +50,8 @@ namespace RetroManager
 
 			using (FileStream inStream = new FileStream(inFile, FileMode.Open))
 			{
-                var inExt = Path.GetExtension(inStream.Name);
-				using (FileStream outStream = new FileStream(outFile, FileMode.Create))
+                using (FileStream outStream = new FileStream(outFile, FileMode.Create))
 				{
-					//if (string.IsNullOrEmpty(Path.GetExtension(outStream.Name)){
-					//	outStream.Name += "." + inExt;
-					//}
 					SevenZip.Compression.LZMA.Encoder encoder = new SevenZip.Compression.LZMA.Encoder();
 					encoder.SetCoderProperties(propIDs, properties);
 					encoder.WriteCoderProperties(outStream);
@@ -99,11 +95,5 @@ namespace RetroManager
 				}
 			}
 		}
-
-		public static void Test()
-		{
-			CompressFileLZMA("DiscUtils.pdb", "DiscUtils.pdb.7z");
-			DecompressFileLZMA("DiscUtils.pdb.7z", "DiscUtils.pdb2");
-		}
-	}
+    }
 }
