@@ -29,7 +29,7 @@ namespace RetroManager
 		    const string sixfour = @"C:\Program Files\7-Zip\7z.exe";
 		    const string threetwo = @"C:\Program Files (x86)\7-Zip\7z.exe";
             string process;
-            string reader = txtDirectory.Text;
+            var reader = txtDirectory.Text;
             if (!RedudantHelper.DirectoryCheck(reader)) return;
 
             if (RedudantHelper.IsUnixBased)

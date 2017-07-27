@@ -52,7 +52,7 @@ namespace RetroManager.Properties
             {
                 if ((resourceMan == null))
                 {
-                    ResourceManager temp = new ResourceManager("RetroManager.Properties.Resources", typeof(Resources).Assembly);
+                    var temp = new ResourceManager("RetroManager.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
