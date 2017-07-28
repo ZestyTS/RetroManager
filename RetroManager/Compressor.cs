@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +29,7 @@ namespace RetroManager
                 markForDeletion = true;
             }
 
-            if (RedudantHelper.isUnixBased)
+            if (RedudantHelper.IsUnixBased)
             {
                 outputPath = outputPath.Replace(@"\", @"/");
             }
@@ -104,7 +104,7 @@ namespace RetroManager
             Debug.WriteLine("About to Decompress: " + inFile);
             outputPath += @"\" + "RetroManagerExtract";
 
-            if (RedudantHelper.isUnixBased)
+            if (RedudantHelper.IsUnixBased)
             {
                 outputPath = outputPath.Replace(@"\", @"/");
             }
@@ -148,7 +148,7 @@ namespace RetroManager
                     string outFileName = Path.ChangeExtension(Path.GetFileName(inFile), string.Empty);
                     string outFileWithoutExt = outFileName.Substring(0,outFileName.Length - 1);
 					string outFile = outputPath + @"\" + outFileWithoutExt;
-                    if (RedudantHelper.isUnixBased)
+                    if (RedudantHelper.IsUnixBased)
 					{
 						outFile = outFile.Replace(@"\", @"/");
 					}
