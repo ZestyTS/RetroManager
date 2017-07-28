@@ -144,11 +144,18 @@ namespace RetroManager
                     }
                 }
                 catch
-                {
+				{
+                    string outFileName = Path.ChangeExtension(Path.GetFileName(inFile), string.Empty);
+                    string outFileWithoutExt = outFileName.Substring(0,outFileName.Length - 1);
+					string outFile = outputPath + @"\" + outFileWithoutExt;
+                    if (RedudantHelper.isUnixBased)
+					{
+						outFile = outFile.Replace(@"\", @"/");
+					}
+
+                    Debug.WriteLine(outFile);
                     using (FileStream inStream = new FileStream(inFile, FileMode.Open))
                     {
-                        string outputFileName = Path.GetFileName(inFile);
-                        string outFile = Path.Combine(outputPath, outputFileName);
                         using (FileStream output = new FileStream(outFile, FileMode.Create))
                         {
                             SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
