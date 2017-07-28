@@ -19,9 +19,9 @@ namespace RetroManager
             Debug.WriteLine("About to Compress: " + inFile);
             bool markForDeletion = false;
 
-            if (!Path.GetDirectoryName(inFile).Contains("RetroManagerExtract"))
+            if (!Path.GetDirectoryName(inFile).Contains("RetroManagerCompress"))
             {
-                outputPath += @"\" + "RetroManagerExtract";
+                outputPath += @"\" + "RetroManagerCompress";
             }
             else
             {
