@@ -1,6 +1,6 @@
 using System;
 
-namespace SevenZip.Compression.RangeCoder
+namespace RetroManager._7zip.Compress.RangeCoder
 {
 	struct BitTreeEncoder
 	{

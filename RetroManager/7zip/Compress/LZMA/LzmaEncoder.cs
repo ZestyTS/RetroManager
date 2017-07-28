@@ -2,10 +2,10 @@
 
 using System;
 using System.IO;
-using SevenZip.Compression.LZ;
-using SevenZip.Compression.RangeCoder;
+using RetroManager._7zip.Compress.LZ;
+using RetroManager._7zip.Compress.RangeCoder;
 
-namespace SevenZip.Compression.LZMA
+namespace RetroManager._7zip.Compress.LZMA
 {
     public class Encoder : ICoder, ISetCoderProperties, IWriteCoderProperties
 	{

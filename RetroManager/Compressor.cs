@@ -1,8 +1,8 @@
 ﻿﻿﻿using System;
 using System.Diagnostics;
 using System.IO;
-using SevenZip;
-using SevenZip.Compression.LZMA;
+using RetroManager._7zip;
+using RetroManager._7zip.Compress.LZMA;
 using SharpCompress.Archives.SevenZip;
 using SharpCompress.Archives.Zip;
 using SharpCompress.Readers;

@@ -3,7 +3,7 @@
 using System;
 using System.IO;
 
-namespace SevenZip.Compression.LZ
+namespace RetroManager._7zip.Compress.LZ
 {
 	public class InWindow
 	{

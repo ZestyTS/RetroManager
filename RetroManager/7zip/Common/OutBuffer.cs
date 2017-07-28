@@ -2,7 +2,7 @@
 
 using System.IO;
 
-namespace SevenZip.Buffer
+namespace RetroManager._7zip.Common
 {
 	public class OutBuffer
 	{

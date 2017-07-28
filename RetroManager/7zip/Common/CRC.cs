@@ -1,6 +1,6 @@
 // Common/CRC.cs
 
-namespace SevenZip
+namespace RetroManager._7zip.Common
 {
 	class CRC
 	{

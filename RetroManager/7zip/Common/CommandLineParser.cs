@@ -3,7 +3,7 @@
 using System;
 using System.Collections;
 
-namespace SevenZip.CommandLineParser
+namespace RetroManager._7zip.Common
 {
 	public enum SwitchType
 	{

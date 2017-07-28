@@ -2,8 +2,9 @@
 
 using System;
 using System.IO;
+using RetroManager._7zip.Common;
 
-namespace SevenZip.Compression.LZ
+namespace RetroManager._7zip.Compress.LZ
 {
 	public class BinTree : InWindow, IMatchFinder
 	{

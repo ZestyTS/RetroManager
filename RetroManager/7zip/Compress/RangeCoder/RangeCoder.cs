@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace SevenZip.Compression.RangeCoder
+namespace RetroManager._7zip.Compress.RangeCoder
 {
 	class Encoder
 	{
