@@ -1,11 +1,14 @@
-﻿namespace RetroManager
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace RetroManager
 {
     partial class RootFolder
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -104,12 +107,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.TextBox txtDirectory;
-        private System.Windows.Forms.Label lbDirectory;
-        private System.Windows.Forms.Button btnMove;
-        private System.Windows.Forms.CheckBox cbRename;
-        private System.Windows.Forms.ToolTip ttDirectory;
-        private System.Windows.Forms.ToolTip ttR;
+        private Button btnBrowse;
+        private TextBox txtDirectory;
+        private Label lbDirectory;
+        private Button btnMove;
+        private CheckBox cbRename;
+        private ToolTip ttDirectory;
+        private ToolTip ttR;
     }
 }

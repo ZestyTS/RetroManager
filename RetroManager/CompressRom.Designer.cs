@@ -1,11 +1,14 @@
-﻿namespace RetroManager
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace RetroManager
 {
     partial class CompressRom
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -355,34 +358,34 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.TextBox txtDirectory;
-        private System.Windows.Forms.Label lbDirectory;
-        private System.Windows.Forms.CheckBox cbExtract;
-        private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.CheckBox cbn64;
-        private System.Windows.Forms.GroupBox gbEmulator;
-        private System.Windows.Forms.CheckBox cbSnes;
-        private System.Windows.Forms.CheckBox cbNes;
-        private System.Windows.Forms.CheckBox cbds;
-        private System.Windows.Forms.CheckBox cb32x;
-        private System.Windows.Forms.CheckBox cbsg;
-        private System.Windows.Forms.CheckBox cbgen;
-        private System.Windows.Forms.CheckBox cbgbc;
-        private System.Windows.Forms.CheckBox cbgb;
-        private System.Windows.Forms.CheckBox cbgba;
-        private System.Windows.Forms.CheckBox cbgg;
-        private System.Windows.Forms.CheckBox cbpc;
-        private System.Windows.Forms.CheckBox cbngp;
-        private System.Windows.Forms.CheckBox cbz;
-        private System.Windows.Forms.CheckBox cbngc;
-        private System.Windows.Forms.CheckBox cblynx;
-        private System.Windows.Forms.CheckBox cbatari;
-        private System.Windows.Forms.CheckBox cbms;
-        private System.Windows.Forms.ToolTip ttDirectory;
-        private System.Windows.Forms.ToolTip ttef;
-        private System.Windows.Forms.ToolTip tte;
-        private System.Windows.Forms.Label lbEmulator;
-        private System.Windows.Forms.ProgressBar pb;
+        private Button btnBrowse;
+        private TextBox txtDirectory;
+        private Label lbDirectory;
+        private CheckBox cbExtract;
+        private Button btnStart;
+        private CheckBox cbn64;
+        private GroupBox gbEmulator;
+        private CheckBox cbSnes;
+        private CheckBox cbNes;
+        private CheckBox cbds;
+        private CheckBox cb32x;
+        private CheckBox cbsg;
+        private CheckBox cbgen;
+        private CheckBox cbgbc;
+        private CheckBox cbgb;
+        private CheckBox cbgba;
+        private CheckBox cbgg;
+        private CheckBox cbpc;
+        private CheckBox cbngp;
+        private CheckBox cbz;
+        private CheckBox cbngc;
+        private CheckBox cblynx;
+        private CheckBox cbatari;
+        private CheckBox cbms;
+        private ToolTip ttDirectory;
+        private ToolTip ttef;
+        private ToolTip tte;
+        private Label lbEmulator;
+        private ProgressBar pb;
     }
 }

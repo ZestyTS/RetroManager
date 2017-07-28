@@ -157,7 +157,7 @@ namespace RetroManager
 
         private void DuplicateRemover_Load(object sender, EventArgs e)
 		{
-			txtDirectory.Text = RedudantHelper.getDefaultDirectory();
+			txtDirectory.Text = RedudantHelper.GetDefaultDirectory();
             ttRegions.IsBalloon = true;
             ttDirectory.IsBalloon = true;
             ttRegions.SetToolTip(lbRegions, "Write the priority of certain regions, whatever is not written will fall under the same priority level.\nExample: (USA), (Europe), (Japan)\nKeep in mind that some regions might be written as [U] instead.");
