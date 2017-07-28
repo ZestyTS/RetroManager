@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿﻿﻿﻿using System;
 using System.Diagnostics;
 using System.IO;
 using RetroManager._7zip;
@@ -11,77 +11,89 @@ namespace RetroManager
 {
     public static class Compressor
     {
-        public static void CompressFile(string inFile, string outputPath)
+        public static void CompressFile(string inFile, string outputPath, int mode)
         {
             Debug.WriteLine("About to Compress: " + inFile);
             var markForDeletion = false;
 
-            if (!Path.GetDirectoryName(inFile).Contains("RetroManagerCompress"))
+			if (!Path.GetDirectoryName(inFile).Contains("retromanagercompress"))
+			{
+				outputPath += @"\" + "retromanagercompress";
+			}
+			else
+			{
+				outputPath = Path.GetDirectoryName(inFile);
+				markForDeletion = true;
+			}
+
+			if (RedudantHelper.IsUnixBased)
+			{
+				outputPath = outputPath.Replace(@"\", @"/");
+			}
+			Directory.CreateDirectory(outputPath);
+
+			var outputFileName = Path.GetFileName(inFile);
+			var outFile = Path.Combine(outputPath, outputFileName);
+
+			var inStream = new FileStream(inFile, FileMode.Open);
+
+            if (mode == 0)
             {
-                outputPath += @"\" + "RetroManagerCompress";
+                var outStream = new FileStream(outFile + ".zip", FileMode.Create);
+                using (var archive = ZipArchive.Create())
+                {
+                    archive.AddEntry(outputFileName, inStream);
+                    archive.SaveTo(outStream);
+                }
             }
             else
             {
-                outputPath = Path.GetDirectoryName(inFile);
-                markForDeletion = true;
-            }
+                const int dictionary = 1 << 23;
+                const int posStateBits = 2;
+                const int litContextBits = 3;
+                const int litPosBits = 0;
+                const int algorithm = 2;
+                const int numFastBytes = 128;
 
-            if (RedudantHelper.IsUnixBased)
-            {
-                outputPath = outputPath.Replace(@"\", @"/");
-            }
+                const string mf = "bt4";
+                const bool eos = true;
 
-            Directory.CreateDirectory(outputPath);
+                CoderPropID[] propIDs =  {
+                    CoderPropID.DictionarySize,
+                    CoderPropID.PosStateBits,
+                    CoderPropID.LitContextBits,
+                    CoderPropID.LitPosBits,
+                    CoderPropID.Algorithm,
+                    CoderPropID.NumFastBytes,
+                    CoderPropID.MatchFinder,
+                    CoderPropID.EndMarker
+                };
 
-            var outputFileName = Path.GetFileName(inFile);
-            var outFile = Path.Combine(outputPath, outputFileName + ".7z");
+                object[] properties = {
+                    dictionary,
+                    posStateBits,
+                    litContextBits,
+                    litPosBits,
+                    algorithm,
+                    numFastBytes,
+                    mf,
+                    eos
+                };
 
-            const int dictionary = 1 << 23;
-            const int posStateBits = 2;
-            const int litContextBits = 3; // for normal files
-                                      // UInt32 litContextBits = 0; // for 32-bit data
-            const int litPosBits = 0;
-            // UInt32 litPosBits = 2; // for 32-bit data
-            const int algorithm = 2;
-            const int numFastBytes = 128;
+                var outStream = new FileStream(outFile + ".7z", FileMode.Create);
 
-            const string mf = "bt4";
-            const bool eos = true;
-
-
-            CoderPropID[] propIDs =  {
-                CoderPropID.DictionarySize,
-                CoderPropID.PosStateBits,
-                CoderPropID.LitContextBits,
-                CoderPropID.LitPosBits,
-                CoderPropID.Algorithm,
-                CoderPropID.NumFastBytes,
-                CoderPropID.MatchFinder,
-                CoderPropID.EndMarker
-            };
-
-            object[] properties = {
-                dictionary,
-                posStateBits,
-                litContextBits,
-                litPosBits,
-                algorithm,
-                numFastBytes,
-                mf,
-                eos
-            };
-
-            using (var inStream = new FileStream(inFile, FileMode.Open))
-            {
-                using (var outStream = new FileStream(outFile, FileMode.Create))
+                using (inStream)
                 {
-                    var encoder = new Encoder();
-                    encoder.SetCoderProperties(propIDs, properties);
-                    encoder.WriteCoderProperties(outStream);
-                    long fileSize = -1;
-                    for (var i = 0; i < 8; i++)
-                        outStream.WriteByte((byte)(fileSize >> (8 * i)));
-                    encoder.Code(inStream, outStream, -1, -1, null);
+                    using (outStream)
+                    {
+                        var encoder = new Encoder();
+                        encoder.SetCoderProperties(propIDs, properties);
+                        encoder.WriteCoderProperties(outStream);
+                        long fileSize = -1;
+                        for (var i = 0; i < 8; i++)
+                            outStream.WriteByte((byte)(fileSize >> (8 * i)));
+                        encoder.Code(inStream, outStream, -1, -1, null);
+                    }
                 }
             }
 
@@ -94,7 +106,7 @@ namespace RetroManager
         public static void DecompressFile(string inFile, string outputPath)
         {
             Debug.WriteLine("About to Decompress: " + inFile);
-            outputPath += @"\" + "RetroManagerExtract";
+            outputPath += @"\" + "retromanagercompress";
 
             if (RedudantHelper.IsUnixBased)
             {
@@ -129,7 +141,6 @@ namespace RetroManager
 						outFile = outFile.Replace(@"\", @"/");
 					}
 
-					Debug.WriteLine(outFile);
 					using (var inStream = new FileStream(inFile, FileMode.Open))
 					{
 						using (var output = new FileStream(outFile, FileMode.Create))

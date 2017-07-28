@@ -118,7 +118,7 @@ namespace RetroManager
         {
             if (e.Error != null)
             {
-                MessageBox.Show(@"Something went wrong" + "\n" + @"Error: " + e.Error.Message + @": " + e.Error.InnerException);
+                MessageBox.Show(@"Something went wrong" + "\n\n" + @"Error: " + e.Error.Message + " " + e.Error.InnerException);
             }
             else
             {
