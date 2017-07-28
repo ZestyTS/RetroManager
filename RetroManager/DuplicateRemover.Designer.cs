@@ -31,6 +31,9 @@ namespace RetroManager
         /// </summary>
         private void InitializeComponent()
         {
+			this.FormBorderStyle = FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
             this.components = new System.ComponentModel.Container();
             this.txtRegions = new System.Windows.Forms.TextBox();
             this.lbRegions = new System.Windows.Forms.Label();

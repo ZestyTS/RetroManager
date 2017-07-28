@@ -31,6 +31,9 @@ namespace RetroManager
         /// </summary>
         private void InitializeComponent()
         {
+			this.FormBorderStyle = FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
             this.btnRegion = new System.Windows.Forms.Button();
             this.btnRevision = new System.Windows.Forms.Button();
             this.btnCompress = new System.Windows.Forms.Button();

@@ -76,6 +76,13 @@ namespace RetroManager
             foreach (var c in gbEmulator.Controls.OfType<CheckBox>().Where(x => x.Checked))
                 emulators.Add(c.Text.Replace(" ", string.Empty).ToLower());
 
+            int mode = 0;
+
+            if (rad7z.Checked) {
+                mode = 1;
+            }
+
+
             foreach (string emu in emulators)
             foreach (var ext in extensions[emu])
             {
@@ -84,7 +91,7 @@ namespace RetroManager
 
                 foreach (var rom in roms)
                 {
-                    Compressor.CompressFile(rom, reader);
+                    Compressor.CompressFile(rom, reader, mode);
                     percentage = (i + 1) * 100 / roms.Length;
                     i++;
                     _bw.ReportProgress(percentage);

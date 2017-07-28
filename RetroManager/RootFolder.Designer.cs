@@ -31,6 +31,7 @@ namespace RetroManager
         /// </summary>
         private void InitializeComponent()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.components = new System.ComponentModel.Container();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtDirectory = new System.Windows.Forms.TextBox();

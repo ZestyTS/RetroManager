@@ -31,6 +31,9 @@ namespace RetroManager
         /// </summary>
         private void InitializeComponent()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
             this.components = new System.ComponentModel.Container();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtDirectory = new System.Windows.Forms.TextBox();
@@ -61,6 +64,9 @@ namespace RetroManager
             this.ttef = new System.Windows.Forms.ToolTip(this.components);
             this.tte = new System.Windows.Forms.ToolTip(this.components);
             this.pb = new System.Windows.Forms.ProgressBar();
+            this.radZip = new System.Windows.Forms.RadioButton();
+			this.rad7z = new System.Windows.Forms.RadioButton();
+			this.lbExport = new System.Windows.Forms.Label();
             this.gbEmulator.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +74,7 @@ namespace RetroManager
             // 
             this.btnBrowse.Location = new System.Drawing.Point(281, 33);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(61, 20);
+            this.btnBrowse.Size = new System.Drawing.Size(61, 24);
             this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
@@ -76,7 +82,7 @@ namespace RetroManager
             // 
             // txtDirectory
             // 
-            this.txtDirectory.Location = new System.Drawing.Point(15, 34);
+            this.txtDirectory.Location = new System.Drawing.Point(15, 33);
             this.txtDirectory.Name = "txtDirectory";
             this.txtDirectory.Size = new System.Drawing.Size(260, 20);
             this.txtDirectory.TabIndex = 1;
@@ -93,18 +99,18 @@ namespace RetroManager
             // cbExtract
             // 
             this.cbExtract.AutoSize = true;
-            this.cbExtract.Location = new System.Drawing.Point(21, 273);
+            this.cbExtract.Location = new System.Drawing.Point(21, 70);
             this.cbExtract.Name = "cbExtract";
             this.cbExtract.Size = new System.Drawing.Size(81, 17);
             this.cbExtract.TabIndex = 21;
-            this.cbExtract.Text = "Extract First";
+            this.cbExtract.Text = "Extract Archives First";
             this.cbExtract.UseVisualStyleBackColor = true;
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(15, 296);
+            this.btnStart.Location = new System.Drawing.Point(15, 315);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.Size = new System.Drawing.Size(75, 25);
             this.btnStart.TabIndex = 22;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -141,7 +147,7 @@ namespace RetroManager
             this.gbEmulator.Controls.Add(this.cbSnes);
             this.gbEmulator.Controls.Add(this.cbNes);
             this.gbEmulator.Controls.Add(this.cbn64);
-            this.gbEmulator.Location = new System.Drawing.Point(15, 74);
+            this.gbEmulator.Location = new System.Drawing.Point(15, 95);
             this.gbEmulator.Name = "gbEmulator";
             this.gbEmulator.Size = new System.Drawing.Size(327, 183);
             this.gbEmulator.TabIndex = 13;
@@ -159,7 +165,7 @@ namespace RetroManager
             // cbgg
             // 
             this.cbgg.AutoSize = true;
-            this.cbgg.Location = new System.Drawing.Point(73, 108);
+            this.cbgg.Location = new System.Drawing.Point(85, 108);
             this.cbgg.Name = "cbgg";
             this.cbgg.Size = new System.Drawing.Size(80, 17);
             this.cbgg.TabIndex = 14;
@@ -169,9 +175,9 @@ namespace RetroManager
             // cbpc
             // 
             this.cbpc.AutoSize = true;
-            this.cbpc.Location = new System.Drawing.Point(237, 95);
+            this.cbpc.Location = new System.Drawing.Point(198, 85);
             this.cbpc.Name = "cbpc";
-            this.cbpc.Size = new System.Drawing.Size(84, 17);
+            this.cbpc.Size = new System.Drawing.Size(49, 17);
             this.cbpc.TabIndex = 20;
             this.cbpc.Text = "PC Machine";
             this.cbpc.UseVisualStyleBackColor = true;
@@ -179,7 +185,7 @@ namespace RetroManager
             // cbngp
             // 
             this.cbngp.AutoSize = true;
-            this.cbngp.Location = new System.Drawing.Point(181, 131);
+            this.cbngp.Location = new System.Drawing.Point(85, 131);
             this.cbngp.Name = "cbngp";
             this.cbngp.Size = new System.Drawing.Size(49, 17);
             this.cbngp.TabIndex = 17;
@@ -189,9 +195,9 @@ namespace RetroManager
             // cbz
             // 
             this.cbz.AutoSize = true;
-            this.cbz.Location = new System.Drawing.Point(237, 72);
+            this.cbz.Location = new System.Drawing.Point(198, 62);
             this.cbz.Name = "cbz";
-            this.cbz.Size = new System.Drawing.Size(77, 17);
+            this.cbz.Size = new System.Drawing.Size(49, 17);
             this.cbz.TabIndex = 19;
             this.cbz.Text = "Z-Machine";
             this.cbz.UseVisualStyleBackColor = true;
@@ -199,7 +205,7 @@ namespace RetroManager
             // cbngc
             // 
             this.cbngc.AutoSize = true;
-            this.cbngc.Location = new System.Drawing.Point(181, 154);
+            this.cbngc.Location = new System.Drawing.Point(85, 154);
             this.cbngc.Name = "cbngc";
             this.cbngc.Size = new System.Drawing.Size(49, 17);
             this.cbngc.TabIndex = 18;
@@ -209,7 +215,7 @@ namespace RetroManager
             // cblynx
             // 
             this.cblynx.AutoSize = true;
-            this.cblynx.Location = new System.Drawing.Point(181, 39);
+            this.cblynx.Location = new System.Drawing.Point(198, 39);
             this.cblynx.Name = "cblynx";
             this.cblynx.Size = new System.Drawing.Size(48, 17);
             this.cblynx.TabIndex = 16;
@@ -219,7 +225,7 @@ namespace RetroManager
             // cbatari
             // 
             this.cbatari.AutoSize = true;
-            this.cbatari.Location = new System.Drawing.Point(181, 16);
+            this.cbatari.Location = new System.Drawing.Point(198, 16);
             this.cbatari.Name = "cbatari";
             this.cbatari.Size = new System.Drawing.Size(74, 17);
             this.cbatari.TabIndex = 15;
@@ -229,7 +235,7 @@ namespace RetroManager
             // cbms
             // 
             this.cbms.AutoSize = true;
-            this.cbms.Location = new System.Drawing.Point(73, 85);
+            this.cbms.Location = new System.Drawing.Point(85, 85);
             this.cbms.Name = "cbms";
             this.cbms.Size = new System.Drawing.Size(95, 17);
             this.cbms.TabIndex = 13;
@@ -249,7 +255,7 @@ namespace RetroManager
             // cb32x
             // 
             this.cb32x.AutoSize = true;
-            this.cb32x.Location = new System.Drawing.Point(73, 39);
+            this.cb32x.Location = new System.Drawing.Point(85, 39);
             this.cb32x.Name = "cb32x";
             this.cb32x.Size = new System.Drawing.Size(45, 17);
             this.cb32x.TabIndex = 11;
@@ -259,7 +265,7 @@ namespace RetroManager
             // cbsg
             // 
             this.cbsg.AutoSize = true;
-            this.cbsg.Location = new System.Drawing.Point(73, 16);
+            this.cbsg.Location = new System.Drawing.Point(85, 16);
             this.cbsg.Name = "cbsg";
             this.cbsg.Size = new System.Drawing.Size(68, 17);
             this.cbsg.TabIndex = 10;
@@ -269,7 +275,7 @@ namespace RetroManager
             // cbgen
             // 
             this.cbgen.AutoSize = true;
-            this.cbgen.Location = new System.Drawing.Point(73, 62);
+            this.cbgen.Location = new System.Drawing.Point(85, 62);
             this.cbgen.Name = "cbgen";
             this.cbgen.Size = new System.Drawing.Size(64, 17);
             this.cbgen.TabIndex = 12;
@@ -328,24 +334,57 @@ namespace RetroManager
             // 
             // pb
             // 
-            this.pb.Location = new System.Drawing.Point(133, 273);
+            this.pb.Location = new System.Drawing.Point(142, 285);
             this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(203, 46);
+            this.pb.Size = new System.Drawing.Size(200, 50);
             this.pb.TabIndex = 14;
-            this.pb.Visible = false;
+			this.pb.Visible = false;
+			// 
+			// radZip
+			// 
+			this.radZip.Checked = true;
+			this.radZip.AutoSize = true;
+			this.radZip.Location = new System.Drawing.Point(61, 285);
+			this.radZip.Name = "radZip";
+			this.radZip.Size = new System.Drawing.Size(40, 20);
+			this.radZip.TabIndex = 22;
+			this.radZip.Text = "Zip";
+			this.radZip.UseVisualStyleBackColor = true;
+			// 
+			// rad7z
+			// 
+			this.rad7z.AutoSize = true;
+			this.rad7z.Location = new System.Drawing.Point(101, 285);
+			this.rad7z.Name = "rad7z";
+			this.rad7z.Size = new System.Drawing.Size(40, 20);
+			this.rad7z.TabIndex = 23;
+			this.rad7z.Text = "7z";
+			this.rad7z.UseVisualStyleBackColor = true;
+            // 
+            // lbExport
+            // 
+            this.lbExport.AutoSize = true;
+			this.lbExport.Location = new System.Drawing.Point(15, 287);
+			this.lbExport.Name = "lbExport";
+			this.lbExport.Size = new System.Drawing.Size(40, 20);
+			this.lbExport.TabIndex = 14;
+			this.lbExport.Text = "Export to";
             // 
             // CompressRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(354, 335);
+			this.ClientSize = new System.Drawing.Size(355, 350);
+			this.Controls.Add(this.rad7z);
+			this.Controls.Add(this.radZip);
             this.Controls.Add(this.pb);
             this.Controls.Add(this.gbEmulator);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.cbExtract);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtDirectory);
-            this.Controls.Add(this.lbDirectory);
+			this.Controls.Add(this.lbDirectory);
+			this.Controls.Add(this.lbExport);
             this.Name = "CompressRom";
             this.Text = "CompressRom";
             this.Load += new System.EventHandler(this.CompressRom_Load);
@@ -385,7 +424,10 @@ namespace RetroManager
         private ToolTip ttDirectory;
         private ToolTip ttef;
         private ToolTip tte;
-        private Label lbEmulator;
+		private Label lbEmulator;
+		private Label lbExport;
         private ProgressBar pb;
+        private RadioButton radZip;
+        private RadioButton rad7z;
     }
 }
