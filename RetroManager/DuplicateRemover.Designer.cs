@@ -1,11 +1,14 @@
-﻿namespace RetroManager
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace RetroManager
 {
     partial class DuplicateRemover
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -125,14 +128,14 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtRegions;
-        private System.Windows.Forms.Label lbRegions;
-        private System.Windows.Forms.Button btnAnalyze;
-        private System.Windows.Forms.Label lbDirectory;
-        private System.Windows.Forms.TextBox txtDirectory;
-        private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.ToolTip ttRegions;
-        private System.Windows.Forms.ToolTip ttDirectory;
+        private TextBox txtRegions;
+        private Label lbRegions;
+        private Button btnAnalyze;
+        private Label lbDirectory;
+        private TextBox txtDirectory;
+        private Button btnBrowse;
+        private Button btnDelete;
+        private ToolTip ttRegions;
+        private ToolTip ttDirectory;
     }
 }

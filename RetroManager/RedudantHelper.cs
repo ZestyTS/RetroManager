@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -8,7 +9,7 @@ namespace RetroManager
 {
     public static class RedudantHelper
     {
-        public static string defaultDirectory = null;
+        public static string DefaultDirectory;
 
 		public static bool DirectoryCheck(string text)
         {
@@ -25,20 +26,19 @@ namespace RetroManager
                 return false;
             } 
 
-            setDefaultDirectory(text);
+            SetDefaultDirectory(text);
 
             return true;
         }
 
-        public static void setDefaultDirectory(string text)
+        public static void SetDefaultDirectory(string text)
 		{
-            RedudantHelper.defaultDirectory = text; 
-            return;
+            DefaultDirectory = text;
 		}
 
-		public static string getDefaultDirectory()
+		public static string GetDefaultDirectory()
 		{
-			return RedudantHelper.defaultDirectory;
+			return DefaultDirectory;
 		}
 
         public static string Browse(string path)
@@ -76,14 +76,14 @@ namespace RetroManager
                 foreach (string w in array)
                     sw.WriteLine(w);
             }
-            System.Diagnostics.Process.Start(filepath);
+            Process.Start(filepath);
         }
 
-		public static bool isUnixBased
+		public static bool IsUnixBased
 		{
 			get
 			{
-				int p = (int)Environment.OSVersion.Platform;
+				var p = (int)Environment.OSVersion.Platform;
 				return (p == 4) || (p == 6) || (p == 128);
 			}
 		}

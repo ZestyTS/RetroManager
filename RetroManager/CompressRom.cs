@@ -29,10 +29,10 @@ namespace RetroManager
 		    const string sixfour = @"C:\Program Files\7-Zip\7z.exe";
 		    const string threetwo = @"C:\Program Files (x86)\7-Zip\7z.exe";
             string process;
-            string reader = txtDirectory.Text;
+            var reader = txtDirectory.Text;
             if (!RedudantHelper.DirectoryCheck(reader)) return;
 
-            if (RedudantHelper.isUnixBased)
+            if (RedudantHelper.IsUnixBased)
                 process = "zip";
             else
             {
@@ -59,13 +59,20 @@ namespace RetroManager
 
                 foreach (var rom in extract)
                 {
-                    string noExtRom = null;
 
-					int extPos = rom.LastIndexOf(".", StringComparison.Ordinal);
-					if (extPos >= 0)
-						noExtRom = rom.Substring(0, extPos);
-                    
-					Compressor.DecompressFileLZMA(rom, noExtRom);
+					if (!RedudantHelper.IsUnixBased)
+					{
+						p.Arguments = "e " + rom;
+					}
+					else
+					{
+						var relativeRom = rom.Replace(reader + "/", null);
+                        p.WorkingDirectory = reader;
+                        p.FileName = "unzip";
+						p.Arguments = " -o " + $@"""{relativeRom}""";
+					}
+					var x = Process.Start(p);
+					x.WaitForExit();
                 }
             }
 
@@ -101,11 +108,26 @@ namespace RetroManager
             {
                 var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
                 var i = 0;
-                //string relativeRom;
 
                 foreach (var rom in roms)
                 {
-                    Compressor.CompressFileLZMA(rom, rom + ".zip");
+                    if (!RedudantHelper.IsUnixBased)
+                    {
+						p.Arguments = "a -tzip -mx9 -mm=Deflate64 " + $@"""{Path.ChangeExtension(rom, ".zip")}""" +
+							" " + $@"""{rom}""";	
+                    }
+                    else
+                    {
+                        var relativeRom = rom.Replace(reader +"/", null);
+                        p.WorkingDirectory = reader;
+                        p.FileName = "zip";
+                        p.Arguments = " -X -9 " + $@"""{Path.ChangeExtension(relativeRom, ".zip")}""" +
+                            " " + $@"""{relativeRom}""";
+					}
+
+					var x = Process.Start(p);
+                    x.WaitForExit();
+
                     var percentage = (i + 1) * 100 / roms.Length;
                     i++;
                     _bw.ReportProgress(percentage);
@@ -151,14 +173,14 @@ namespace RetroManager
 
         private void CompressRom_Load(object sender, EventArgs e)
         {
-			txtDirectory.Text = RedudantHelper.getDefaultDirectory();
+			txtDirectory.Text = RedudantHelper.GetDefaultDirectory();
             ttDirectory.IsBalloon = true;
             ttef.IsBalloon = true;
             tte.IsBalloon = true;
             tte.SetToolTip(lbEmulator, "These systems have at least one emulator that supports zip files.");
             ttDirectory.SetToolTip(lbDirectory, "Put the root directory of the roms that will be zip'd.");
             ttef.SetToolTip(cbExtract,
-                "Checking this will make it so files already ZIP'd will be extracted first to be zip'd up using 7-Zip's algorithm.");
+                "Roms that are already zip'd up will be extracted and then zip'd up using this program's algorithm.\nThis is only to see if this program's algorithm can help you save some extra space.");
         }
     }
 }
