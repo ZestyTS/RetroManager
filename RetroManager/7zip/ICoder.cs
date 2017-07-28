@@ -1,6 +1,7 @@
 // ICoder.h
 
 using System;
+using System.IO;
 
 namespace SevenZip
 {
@@ -32,7 +33,7 @@ namespace SevenZip
 		/// output size. -1 if unknown.
 		/// </param>
 		void SetProgress(Int64 inSize, Int64 outSize);
-	};
+	}
 
 	public interface ICoder
 	{
@@ -57,9 +58,9 @@ namespace SevenZip
 		/// <exception cref="SevenZip.DataErrorException">
 		/// if input stream is not valid
 		/// </exception>
-		void Code(System.IO.Stream inStream, System.IO.Stream outStream,
+		void Code(Stream inStream, Stream outStream,
 			Int64 inSize, Int64 outSize, ICodeProgress progress);
-	};
+	}
 
 	/*
 	public interface ICoder2
@@ -137,17 +138,17 @@ namespace SevenZip
 		/// Specifies mode with end marker.
 		/// </summary>
 		EndMarker
-	};
+	}
 
 
 	public interface ISetCoderProperties
 	{
 		void SetCoderProperties(CoderPropID[] propIDs, object[] properties);
-	};
+	}
 
 	public interface IWriteCoderProperties
 	{
-		void WriteCoderProperties(System.IO.Stream outStream);
+		void WriteCoderProperties(Stream outStream);
 	}
 
 	public interface ISetDecoderProperties

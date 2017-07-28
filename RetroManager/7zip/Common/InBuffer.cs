@@ -1,5 +1,7 @@
 // InBuffer.cs
 
+using System.IO;
+
 namespace SevenZip.Buffer
 {
 	public class InBuffer
@@ -8,7 +10,7 @@ namespace SevenZip.Buffer
 		uint m_Pos;
 		uint m_Limit;
 		uint m_BufferSize;
-		System.IO.Stream m_Stream;
+		Stream m_Stream;
 		bool m_StreamWasExhausted;
 		ulong m_ProcessedSize;
 
@@ -18,7 +20,7 @@ namespace SevenZip.Buffer
 			m_BufferSize = bufferSize;
 		}
 
-		public void Init(System.IO.Stream stream)
+		public void Init(Stream stream)
 		{
 			m_Stream = stream;
 			m_ProcessedSize = 0;
@@ -32,7 +34,7 @@ namespace SevenZip.Buffer
 			if (m_StreamWasExhausted)
 				return false;
 			m_ProcessedSize += m_Pos;
-			int aNumProcessedBytes = m_Stream.Read(m_Buffer, 0, (int)m_BufferSize);
+			var aNumProcessedBytes = m_Stream.Read(m_Buffer, 0, (int)m_BufferSize);
 			m_Pos = 0;
 			m_Limit = (uint)aNumProcessedBytes;
 			m_StreamWasExhausted = (aNumProcessedBytes == 0);

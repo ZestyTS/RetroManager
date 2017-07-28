@@ -63,16 +63,16 @@ namespace SevenZip.CommandLineParser
 		public Parser(int numSwitches)
 		{
 			_switches = new SwitchResult[numSwitches];
-			for (int i = 0; i < numSwitches; i++)
+			for (var i = 0; i < numSwitches; i++)
 				_switches[i] = new SwitchResult();
 		}
 
 		bool ParseString(string srcString, SwitchForm[] switchForms)
 		{
-			int len = srcString.Length;
+			var len = srcString.Length;
 			if (len == 0)
 				return false;
-			int pos = 0;
+			var pos = 0;
 			if (!IsItSwitchChar(srcString[pos]))
 				return false;
 			while (pos < len)
@@ -80,11 +80,11 @@ namespace SevenZip.CommandLineParser
 				if (IsItSwitchChar(srcString[pos]))
 					pos++;
 				const int kNoLen = -1;
-				int matchedSwitchIndex = 0;
-				int maxLen = kNoLen;
-				for (int switchIndex = 0; switchIndex < _switches.Length; switchIndex++)
+				var matchedSwitchIndex = 0;
+				var maxLen = kNoLen;
+				for (var switchIndex = 0; switchIndex < _switches.Length; switchIndex++)
 				{
-					int switchLen = switchForms[switchIndex].IDString.Length;
+					var switchLen = switchForms[switchIndex].IDString.Length;
 					if (switchLen <= maxLen || pos + switchLen > len)
 						continue;
 					if (String.Compare(switchForms[switchIndex].IDString, 0,
@@ -96,14 +96,14 @@ namespace SevenZip.CommandLineParser
 				}
 				if (maxLen == kNoLen)
 					throw new Exception("maxLen == kNoLen");
-				SwitchResult matchedSwitch = _switches[matchedSwitchIndex];
-				SwitchForm switchForm = switchForms[matchedSwitchIndex];
+				var matchedSwitch = _switches[matchedSwitchIndex];
+				var switchForm = switchForms[matchedSwitchIndex];
 				if ((!switchForm.Multi) && matchedSwitch.ThereIs)
 					throw new Exception("switch must be single");
 				matchedSwitch.ThereIs = true;
 				pos += maxLen;
-				int tailSize = len - pos;
-				SwitchType type = switchForm.Type;
+				var tailSize = len - pos;
+				var type = switchForm.Type;
 				switch (type)
 				{
 					case SwitchType.PostMinus:
@@ -122,13 +122,13 @@ namespace SevenZip.CommandLineParser
 						{
 							if (tailSize < switchForm.MinLen)
 								throw new Exception("switch is not full");
-							string charSet = switchForm.PostCharSet;
+							var charSet = switchForm.PostCharSet;
 							const int kEmptyCharValue = -1;
 							if (tailSize == 0)
 								matchedSwitch.PostCharIndex = kEmptyCharValue;
 							else
 							{
-								int index = charSet.IndexOf(srcString[pos]);
+								var index = charSet.IndexOf(srcString[pos]);
 								if (index < 0)
 									matchedSwitch.PostCharIndex = kEmptyCharValue;
 								else
@@ -142,7 +142,7 @@ namespace SevenZip.CommandLineParser
 					case SwitchType.LimitedPostString:
 					case SwitchType.UnLimitedPostString:
 						{
-							int minLen = switchForm.MinLen;
+							var minLen = switchForm.MinLen;
 							if (tailSize < minLen)
 								throw new Exception("switch is not full");
 							if (type == SwitchType.UnLimitedPostString)
@@ -150,11 +150,11 @@ namespace SevenZip.CommandLineParser
 								matchedSwitch.PostStrings.Add(srcString.Substring(pos));
 								return true;
 							}
-							String stringSwitch = srcString.Substring(pos, minLen);
+							var stringSwitch = srcString.Substring(pos, minLen);
 							pos += minLen;
-							for (int i = minLen; i < switchForm.MaxLen && pos < len; i++, pos++)
+							for (var i = minLen; i < switchForm.MaxLen && pos < len; i++, pos++)
 							{
-								char c = srcString[pos];
+								var c = srcString[pos];
 								if (IsItSwitchChar(c))
 									break;
 								stringSwitch += c;
@@ -170,11 +170,11 @@ namespace SevenZip.CommandLineParser
 
 		public void ParseStrings(SwitchForm[] switchForms, string[] commandStrings)
 		{
-			int numCommandStrings = commandStrings.Length;
-			bool stopSwitch = false;
-			for (int i = 0; i < numCommandStrings; i++)
+			var numCommandStrings = commandStrings.Length;
+			var stopSwitch = false;
+			for (var i = 0; i < numCommandStrings; i++)
 			{
-				string s = commandStrings[i];
+				var s = commandStrings[i];
 				if (stopSwitch)
 					NonSwitchStrings.Add(s);
 				else
@@ -191,9 +191,9 @@ namespace SevenZip.CommandLineParser
 		public static int ParseCommand(CommandForm[] commandForms, string commandString,
 			out string postString)
 		{
-			for (int i = 0; i < commandForms.Length; i++)
+			for (var i = 0; i < commandForms.Length; i++)
 			{
-				string id = commandForms[i].IDString;
+				var id = commandForms[i].IDString;
 				if (commandForms[i].PostStringMode)
 				{
 					if (commandString.IndexOf(id) == 0)
@@ -217,16 +217,16 @@ namespace SevenZip.CommandLineParser
 			string commandString, ArrayList indices)
 		{
 			indices.Clear();
-			int numUsedChars = 0;
-			for (int i = 0; i < numForms; i++)
+			var numUsedChars = 0;
+			for (var i = 0; i < numForms; i++)
 			{
-				CommandSubCharsSet charsSet = forms[i];
-				int currentIndex = -1;
-				int len = charsSet.Chars.Length;
-				for (int j = 0; j < len; j++)
+				var charsSet = forms[i];
+				var currentIndex = -1;
+				var len = charsSet.Chars.Length;
+				for (var j = 0; j < len; j++)
 				{
-					char c = charsSet.Chars[j];
-					int newIndex = commandString.IndexOf(c);
+					var c = charsSet.Chars[j];
+					var newIndex = commandString.IndexOf(c);
 					if (newIndex >= 0)
 					{
 						if (currentIndex >= 0)
@@ -258,7 +258,7 @@ namespace SevenZip.CommandLineParser
 	public class CommandForm
 	{
 		public string IDString = "";
-		public bool PostStringMode = false;
+		public bool PostStringMode;
 		public CommandForm(string idString, bool postStringMode)
 		{
 			IDString = idString;

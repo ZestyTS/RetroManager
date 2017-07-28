@@ -1,11 +1,10 @@
 ﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
+          using System.Collections;
+          using System.Collections.Generic;
+          using System.ComponentModel;
+          using System.IO;
+          using System.Linq;
+          using System.Windows.Forms;
 
 namespace RetroManager
 {
@@ -26,13 +25,13 @@ namespace RetroManager
 
         private void BtnStart_Work(object sender, EventArgs e)
 		{
-            string reader = txtDirectory.Text;
+            var reader = txtDirectory.Text;
             if (!RedudantHelper.DirectoryCheck(reader)) return;
             var percentage = 0;
 
             if (cbExtract.Checked)
             {
-                List<string> extract = new List<string>();
+                var extract = new List<string>();
 				extract.AddRange(Directory.GetFiles(reader, "*.zip", SearchOption.AllDirectories));
 				extract.AddRange(Directory.GetFiles(reader, "*.7z", SearchOption.AllDirectories));
                 var i = 0;

@@ -12,8 +12,8 @@ namespace SevenZip
 			const uint kPoly = 0xEDB88320;
 			for (uint i = 0; i < 256; i++)
 			{
-				uint r = i;
-				for (int j = 0; j < 8; j++)
+				var r = i;
+				for (var j = 0; j < 8; j++)
 					if ((r & 1) != 0)
 						r = (r >> 1) ^ kPoly;
 					else
@@ -41,7 +41,7 @@ namespace SevenZip
 
 		static uint CalculateDigest(byte[] data, uint offset, uint size)
 		{
-			CRC crc = new CRC();
+			var crc = new CRC();
 			// crc.Init();
 			crc.Update(data, offset, size);
 			return crc.GetDigest();
