@@ -1,10 +1,11 @@
 ﻿﻿﻿using System;
-using System.IO;
-using SevenZip;
-using SharpCompress.Archives.SevenZip;
-using SharpCompress.Archives.Zip;
-using SharpCompress.Readers;
-using System.Diagnostics;
+  using System.Diagnostics;
+  using System.IO;
+  using SevenZip;
+  using SevenZip.Compression.LZMA;
+  using SharpCompress.Archives.SevenZip;
+  using SharpCompress.Archives.Zip;
+  using SharpCompress.Readers;
 
 namespace RetroManager
 {
@@ -13,7 +14,7 @@ namespace RetroManager
         public static void CompressFile(string inFile, string outputPath)
         {
             Debug.WriteLine("About to Compress: " + inFile);
-            bool markForDeletion = false;
+            var markForDeletion = false;
 
             if (!Path.GetDirectoryName(inFile).Contains("RetroManagerCompress"))
             {
@@ -32,21 +33,20 @@ namespace RetroManager
 
             Directory.CreateDirectory(outputPath);
 
-            string outputFileName = Path.GetFileName(inFile);
-            string outFile = Path.Combine(outputPath, outputFileName + ".7z");
+            var outputFileName = Path.GetFileName(inFile);
+            var outFile = Path.Combine(outputPath, outputFileName + ".7z");
 
-            Int32 dictionary = 1 << 23;
-            Int32 posStateBits = 2;
-            Int32 litContextBits = 3; // for normal files
+            const int dictionary = 1 << 23;
+            const int posStateBits = 2;
+            const int litContextBits = 3; // for normal files
                                       // UInt32 litContextBits = 0; // for 32-bit data
-            Int32 litPosBits = 0;
+            const int litPosBits = 0;
             // UInt32 litPosBits = 2; // for 32-bit data
-            Int32 algorithm = 2;
-            Int32 numFastBytes = 128;
+            const int algorithm = 2;
+            const int numFastBytes = 128;
 
-            string mf = "bt4";
-            bool eos = true;
-            bool stdInMode = false;
+            const string mf = "bt4";
+            const bool eos = true;
 
 
             CoderPropID[] propIDs =  {
@@ -61,30 +61,26 @@ namespace RetroManager
             };
 
             object[] properties = {
-                (Int32)(dictionary),
-                (Int32)(posStateBits),
-                (Int32)(litContextBits),
-                (Int32)(litPosBits),
-                (Int32)(algorithm),
-                (Int32)(numFastBytes),
+                dictionary,
+                posStateBits,
+                litContextBits,
+                litPosBits,
+                algorithm,
+                numFastBytes,
                 mf,
                 eos
             };
 
-            using (FileStream inStream = new FileStream(inFile, FileMode.Open))
+            using (var inStream = new FileStream(inFile, FileMode.Open))
             {
-                using (FileStream outStream = new FileStream(outFile, FileMode.Create))
+                using (var outStream = new FileStream(outFile, FileMode.Create))
                 {
-                    SevenZip.Compression.LZMA.Encoder encoder = new SevenZip.Compression.LZMA.Encoder();
+                    var encoder = new Encoder();
                     encoder.SetCoderProperties(propIDs, properties);
                     encoder.WriteCoderProperties(outStream);
-                    Int64 fileSize;
-                    if (eos || stdInMode)
-                        fileSize = -1;
-                    else
-                        fileSize = inStream.Length;
-                    for (int i = 0; i < 8; i++)
-                        outStream.WriteByte((Byte)(fileSize >> (8 * i)));
+                    long fileSize = -1;
+                    for (var i = 0; i < 8; i++)
+                        outStream.WriteByte((byte)(fileSize >> (8 * i)));
                     encoder.Code(inStream, outStream, -1, -1, null);
                 }
             }
@@ -110,50 +106,50 @@ namespace RetroManager
             if (Path.GetExtension(inFile) == ".7z")
             {
                 try {
-					using (FileStream inStream = new FileStream(inFile, FileMode.Open))
+					using (var inStream = new FileStream(inFile, FileMode.Open))
 					{
 						using (var archive = SevenZipArchive.Open(inStream))
 						{
-							IReader reader = archive.ExtractAllEntries();
+							var reader = archive.ExtractAllEntries();
 							while (reader.MoveToNextEntry())
 							{
 								if (!reader.Entry.IsDirectory)
-									reader.WriteEntryToDirectory(outputPath, new ExtractionOptions() { ExtractFullPath = false, Overwrite = true });
+									reader.WriteEntryToDirectory(outputPath, new ExtractionOptions { ExtractFullPath = false, Overwrite = true });
 							}
 						}
 					}
 				}
 				catch
 				{
-					string outFileName = Path.ChangeExtension(Path.GetFileName(inFile), string.Empty);
-					string outFileWithoutExt = outFileName.Substring(0, outFileName.Length - 1);
-					string outFile = outputPath + @"\" + outFileWithoutExt;
+					var outFileName = Path.ChangeExtension(Path.GetFileName(inFile), string.Empty);
+					var outFileWithoutExt = outFileName.Substring(0, outFileName.Length - 1);
+					var outFile = outputPath + @"\" + outFileWithoutExt;
 					if (RedudantHelper.IsUnixBased)
 					{
 						outFile = outFile.Replace(@"\", @"/");
 					}
 
 					Debug.WriteLine(outFile);
-					using (FileStream inStream = new FileStream(inFile, FileMode.Open))
+					using (var inStream = new FileStream(inFile, FileMode.Open))
 					{
-						using (FileStream output = new FileStream(outFile, FileMode.Create))
+						using (var output = new FileStream(outFile, FileMode.Create))
 						{
-							SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
+							var decoder = new Decoder();
 
-							byte[] properties = new byte[5];
+							var properties = new byte[5];
 							if (inStream.Read(properties, 0, 5) != 5)
 								throw (new Exception("input .lzma is too short"));
 							decoder.SetDecoderProperties(properties);
 
 							long outSize = 0;
-							for (int i = 0; i < 8; i++)
+							for (var i = 0; i < 8; i++)
 							{
-								int v = inStream.ReadByte();
+								var v = inStream.ReadByte();
 								if (v < 0)
 									throw (new Exception("Can't Read 1"));
 								outSize |= ((long)(byte)v) << (8 * i);
 							}
-							long compressedSize = inStream.Length - inStream.Position;
+							var compressedSize = inStream.Length - inStream.Position;
 
 							decoder.Code(inStream, output, compressedSize, outSize, null);
 						}
@@ -165,50 +161,50 @@ namespace RetroManager
             {
                 try
                 {
-                    using (FileStream inStream = new FileStream(inFile, FileMode.Open))
+                    using (var inStream = new FileStream(inFile, FileMode.Open))
                     {
                         using (var archive = ZipArchive.Open(inStream))
                         {
-                            IReader reader = archive.ExtractAllEntries();
+                            var reader = archive.ExtractAllEntries();
                             while (reader.MoveToNextEntry())
                             {
                                 if (!reader.Entry.IsDirectory)
-                                    reader.WriteEntryToDirectory(outputPath, new ExtractionOptions() { ExtractFullPath = false, Overwrite = true });
+                                    reader.WriteEntryToDirectory(outputPath, new ExtractionOptions { ExtractFullPath = false, Overwrite = true });
                             }
                         }
                     }
                 }
                 catch
 				{
-                    string outFileName = Path.ChangeExtension(Path.GetFileName(inFile), string.Empty);
-                    string outFileWithoutExt = outFileName.Substring(0,outFileName.Length - 1);
-					string outFile = outputPath + @"\" + outFileWithoutExt;
+                    var outFileName = Path.ChangeExtension(Path.GetFileName(inFile), string.Empty);
+                    var outFileWithoutExt = outFileName.Substring(0,outFileName.Length - 1);
+					var outFile = outputPath + @"\" + outFileWithoutExt;
                     if (RedudantHelper.IsUnixBased)
 					{
 						outFile = outFile.Replace(@"\", @"/");
 					}
 
                     Debug.WriteLine(outFile);
-                    using (FileStream inStream = new FileStream(inFile, FileMode.Open))
+                    using (var inStream = new FileStream(inFile, FileMode.Open))
                     {
-                        using (FileStream output = new FileStream(outFile, FileMode.Create))
+                        using (var output = new FileStream(outFile, FileMode.Create))
                         {
-                            SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
+                            var decoder = new Decoder();
 
-                            byte[] properties = new byte[5];
+                            var properties = new byte[5];
                             if (inStream.Read(properties, 0, 5) != 5)
                                 throw (new Exception("input .lzma is too short"));
                             decoder.SetDecoderProperties(properties);
 
                             long outSize = 0;
-                            for (int i = 0; i < 8; i++)
+                            for (var i = 0; i < 8; i++)
                             {
-                                int v = inStream.ReadByte();
+                                var v = inStream.ReadByte();
                                 if (v < 0)
                                     throw (new Exception("Can't Read 1"));
                                 outSize |= ((long)(byte)v) << (8 * i);
                             }
-                            long compressedSize = inStream.Length - inStream.Position;
+                            var compressedSize = inStream.Length - inStream.Position;
 
                             decoder.Code(inStream, output, compressedSize, outSize, null);
                         }
