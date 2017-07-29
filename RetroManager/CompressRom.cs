@@ -82,22 +82,29 @@ namespace RetroManager
                 mode = 1;
             }
 
+		    try
+		    {
+		        foreach (string emu in emulators)
+		        foreach (var ext in extensions[emu])
+		        {
+		            var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
+		            var i = 0;
 
-            foreach (string emu in emulators)
-            foreach (var ext in extensions[emu])
-            {
-                var roms = Directory.GetFiles(reader, "*." + ext, SearchOption.AllDirectories);
-                var i = 0;
+		            foreach (var rom in roms)
+		            {
+		                Compressor.CompressFile(rom, reader, mode);
+		                percentage = (i + 1) * 100 / roms.Length;
+		                i++;
+		                _bw.ReportProgress(percentage);
+		            }
+		        }
+		    }
 
-                foreach (var rom in roms)
-                {
-                    Compressor.CompressFile(rom, reader, mode);
-                    percentage = (i + 1) * 100 / roms.Length;
-                    i++;
-                    _bw.ReportProgress(percentage);
-                }
-            }
-        }
+		    catch
+		    {
+                //ignored since an emulator was probably checked that the user doesn't have games for
+		    }
+		}
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
