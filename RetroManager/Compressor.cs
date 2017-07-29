@@ -14,17 +14,9 @@ namespace RetroManager
         public static void CompressFile(string inFile, string outputPath, int mode)
         {
             Debug.WriteLine("About to Compress: " + inFile);
-            var markForDeletion = false;
 
-			if (!Path.GetDirectoryName(inFile).Contains("RetroManagerExtract"))
-			{
-				outputPath += @"\" + "RetroManagerExtract";
-			}
-			else
-			{
-				outputPath = Path.GetDirectoryName(inFile);
-				markForDeletion = true;
-			}
+            outputPath = Path.GetDirectoryName(inFile);
+			var markForDeletion = true;
 
 			if (RedudantHelper.IsUnixBased)
 			{
@@ -109,7 +101,7 @@ namespace RetroManager
         public static void DecompressFile(string inFile, string outputPath)
         {
             Debug.WriteLine("About to Decompress: " + inFile);
-            outputPath += @"\" + "retromanagercompress";
+            outputPath += @"\" + "RetroManagerExtract";
 
             if (RedudantHelper.IsUnixBased)
             {
