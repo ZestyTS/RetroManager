@@ -1,10 +1,10 @@
 ﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
-          using System.Collections;
-          using System.Collections.Generic;
-          using System.ComponentModel;
-          using System.IO;
-          using System.Linq;
-          using System.Windows.Forms;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace RetroManager
 {
@@ -27,7 +27,7 @@ namespace RetroManager
 		{
             var reader = txtDirectory.Text;
             if (!RedudantHelper.DirectoryCheck(reader)) return;
-            var percentage = 0;
+            int percentage;
 
             if (cbExtract.Checked)
             {
@@ -76,7 +76,7 @@ namespace RetroManager
             foreach (var c in gbEmulator.Controls.OfType<CheckBox>().Where(x => x.Checked))
                 emulators.Add(c.Text.Replace(" ", string.Empty).ToLower());
 
-            int mode = 0;
+            var mode = 0;
 
             if (rad7z.Checked) {
                 mode = 1;
