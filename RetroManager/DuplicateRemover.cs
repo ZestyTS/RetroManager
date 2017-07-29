@@ -87,7 +87,7 @@ namespace RetroManager
                 if (regionMap[title].Count < 2)
                     continue;
 
-                if (region.Contains("Rev"))
+                if (region.Contains("Rev") && _revision)
                 {
                     region = region.Substring(region.IndexOf("(R"));
 
