@@ -35,64 +35,67 @@ namespace RetroManager
 			var outputFileName = Path.GetFileName(inFile);
 			var outFile = Path.Combine(outputPath, outputFileName);
 
-			var inStream = new FileStream(inFile, FileMode.Open);
-
-            if (mode == 0)
+            using (var inStream = new FileStream(inFile, FileMode.Open))
             {
-                var outStream = new FileStream(outFile + ".zip", FileMode.Create);
-                using (var archive = ZipArchive.Create())
+                if (mode == 0)
                 {
-                    archive.AddEntry(outputFileName, inStream);
-                    archive.SaveTo(outStream);
-                }
-            }
-            else
-            {
-                const int dictionary = 1 << 23;
-                const int posStateBits = 2;
-                const int litContextBits = 3;
-                const int litPosBits = 0;
-                const int algorithm = 2;
-                const int numFastBytes = 128;
-
-                const string mf = "bt4";
-                const bool eos = true;
-
-                CoderPropID[] propIDs =  {
-                    CoderPropID.DictionarySize,
-                    CoderPropID.PosStateBits,
-                    CoderPropID.LitContextBits,
-                    CoderPropID.LitPosBits,
-                    CoderPropID.Algorithm,
-                    CoderPropID.NumFastBytes,
-                    CoderPropID.MatchFinder,
-                    CoderPropID.EndMarker
-                };
-
-                object[] properties = {
-                    dictionary,
-                    posStateBits,
-                    litContextBits,
-                    litPosBits,
-                    algorithm,
-                    numFastBytes,
-                    mf,
-                    eos
-                };
-
-                var outStream = new FileStream(outFile + ".7z", FileMode.Create);
-
-                using (inStream)
-                {
-                    using (outStream)
+                    using (var outStream = new FileStream(outFile + ".zip", FileMode.Create))
                     {
-                        var encoder = new Encoder();
-                        encoder.SetCoderProperties(propIDs, properties);
-                        encoder.WriteCoderProperties(outStream);
-                        long fileSize = -1;
-                        for (var i = 0; i < 8; i++)
-                            outStream.WriteByte((byte)(fileSize >> (8 * i)));
-                        encoder.Code(inStream, outStream, -1, -1, null);
+                        using (var archive = ZipArchive.Create())
+                        {
+                                archive.AddEntry(outputFileName, inStream);
+                                archive.SaveTo(outStream);
+                        }
+                    }
+                }
+                else
+                {
+                    const int dictionary = 1 << 23;
+                    const int posStateBits = 2;
+                    const int litContextBits = 3;
+                    const int litPosBits = 0;
+                    const int algorithm = 2;
+                    const int numFastBytes = 128;
+
+                    const string mf = "bt4";
+                    const bool eos = true;
+
+                    CoderPropID[] propIDs =
+                    {
+                        CoderPropID.DictionarySize,
+                        CoderPropID.PosStateBits,
+                        CoderPropID.LitContextBits,
+                        CoderPropID.LitPosBits,
+                        CoderPropID.Algorithm,
+                        CoderPropID.NumFastBytes,
+                        CoderPropID.MatchFinder,
+                        CoderPropID.EndMarker
+                    };
+
+                    object[] properties =
+                    {
+                        dictionary,
+                        posStateBits,
+                        litContextBits,
+                        litPosBits,
+                        algorithm,
+                        numFastBytes,
+                        mf,
+                        eos
+                    };
+
+                    using (inStream)
+                    {
+                        using (var outStream = new FileStream(outFile + ".7z", FileMode.Create))
+                        {
+                            var encoder = new Encoder();
+                            encoder.SetCoderProperties(propIDs, properties);
+                            encoder.WriteCoderProperties(outStream);
+                            long fileSize = -1;
+                            for (var i = 0; i < 8; i++)
+                                outStream.WriteByte((byte) (fileSize >> (8 * i)));
+                            encoder.Code(inStream, outStream, -1, -1, null);
+                        }
                     }
                 }
             }
