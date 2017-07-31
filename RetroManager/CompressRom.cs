@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -92,7 +92,7 @@ namespace RetroManager
 
 		            foreach (var rom in roms)
 		            {
-		                Compressor.CompressFile(rom, reader, mode);
+		                Compressor.CompressFile(rom, reader, mode, cbDeleteOriginal.Checked);
 		                percentage = (i + 1) * 100 / roms.Length;
 		                i++;
 		                _bw.ReportProgress(percentage);

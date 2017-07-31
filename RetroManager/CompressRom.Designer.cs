@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿﻿using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace RetroManager
@@ -67,6 +67,7 @@ namespace RetroManager
             this.radZip = new System.Windows.Forms.RadioButton();
 			this.rad7z = new System.Windows.Forms.RadioButton();
 			this.lbExport = new System.Windows.Forms.Label();
+            this.cbDeleteOriginal = new System.Windows.Forms.CheckBox();
             this.gbEmulator.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,7 +109,7 @@ namespace RetroManager
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(15, 315);
+            this.btnStart.Location = new System.Drawing.Point(15, 335);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 25);
             this.btnStart.TabIndex = 22;
@@ -334,11 +335,22 @@ namespace RetroManager
             // 
             // pb
             // 
-            this.pb.Location = new System.Drawing.Point(142, 285);
+            this.pb.Location = new System.Drawing.Point(155, 285);
             this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(200, 50);
+            this.pb.Size = new System.Drawing.Size(187, 50);
             this.pb.TabIndex = 14;
 			this.pb.Visible = false;
+			// 
+			// cbDeleteOriginal
+			// 
+			this.cbDeleteOriginal.Checked = true;
+			this.cbDeleteOriginal.AutoSize = true;
+			this.cbDeleteOriginal.Location = new System.Drawing.Point(15, 312);
+			this.cbDeleteOriginal.Name = "cbDeleteOriginal";
+			this.cbDeleteOriginal.Size = new System.Drawing.Size(65, 20);
+			this.cbDeleteOriginal.TabIndex = 24;
+			this.cbDeleteOriginal.Text = "Delete Original Roms?";
+			this.cbDeleteOriginal.UseVisualStyleBackColor = true;
 			// 
 			// radZip
 			// 
@@ -374,7 +386,7 @@ namespace RetroManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(355, 350);
+			this.ClientSize = new System.Drawing.Size(355, 380);
 			this.Controls.Add(this.rad7z);
 			this.Controls.Add(this.radZip);
             this.Controls.Add(this.pb);
@@ -385,6 +397,7 @@ namespace RetroManager
             this.Controls.Add(this.txtDirectory);
 			this.Controls.Add(this.lbDirectory);
 			this.Controls.Add(this.lbExport);
+			this.Controls.Add(this.cbDeleteOriginal);
             this.Name = "CompressRom";
             this.Text = "CompressRom";
             this.Load += new System.EventHandler(this.CompressRom_Load);
@@ -429,5 +442,6 @@ namespace RetroManager
         private ProgressBar pb;
         private RadioButton radZip;
         private RadioButton rad7z;
+        private CheckBox cbDeleteOriginal;
     }
 }

@@ -1,4 +1,4 @@
-﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿using System;
 using System.Diagnostics;
 using System.IO;
 using RetroManager._7zip;
@@ -11,12 +11,11 @@ namespace RetroManager
 {
     public static class Compressor
     {
-        public static void CompressFile(string inFile, string outputPath, int mode)
+        public static void CompressFile(string inFile, string outputPath, int mode, bool markForDeletion)
         {
             Debug.WriteLine("About to Compress: " + inFile);
 
             outputPath = Path.GetDirectoryName(inFile);
-			var markForDeletion = true;
 
 			if (RedudantHelper.IsUnixBased)
 			{
@@ -90,6 +89,10 @@ namespace RetroManager
                         }
                     }
                 }
+            }
+
+            if (outputPath.Contains("RetroManagerExtract")) {
+                markForDeletion = true;
             }
 
             if (markForDeletion)
