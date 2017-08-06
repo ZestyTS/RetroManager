@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace RetroManager
 {
-    public partial class CompressRom : Form
+    public partial class CompressRomForm : Form
 	{
 
         private readonly BackgroundWorker _bw = new BackgroundWorker();
-        public CompressRom()
+        public CompressRomForm()
         {
             InitializeComponent();
 

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace RetroManager
 {
-    partial class CompressRom
+    partial class CompressRomForm
     {
         /// <summary>
         /// Required designer variable.

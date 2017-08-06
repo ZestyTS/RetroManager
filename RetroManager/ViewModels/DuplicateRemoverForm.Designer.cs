@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace RetroManager
 {
-    partial class DuplicateRemover
+    partial class DuplicateRemoverForm
     {
         /// <summary>
         /// Required designer variable.

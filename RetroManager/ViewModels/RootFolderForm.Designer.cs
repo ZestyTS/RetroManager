@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace RetroManager
 {
-    partial class RootFolder
+    partial class RootFolderForm
     {
         /// <summary>
         /// Required designer variable.
