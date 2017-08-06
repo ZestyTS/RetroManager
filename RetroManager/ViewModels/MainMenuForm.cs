@@ -1,37 +1,37 @@
 ﻿using System;
 using System.Windows.Forms;
 
+using RetroManager.Models;
+
 namespace RetroManager
 {
-    public partial class MainMenu : Form
+    public partial class MainMenuForm : Form
     {
-        public MainMenu()
+        public MainMenuForm()
         {
             InitializeComponent();
         }
 
         private void BtnRegion_Click(object sender, EventArgs e)
         {
-            var dr = new DuplicateRemover();
-            dr.Show();
+            var model = new RegionDuplicateRemover();
+            new DuplicateRemoverForm(model).Show();
         }
 
         private void BtnRevision_Click(object sender, EventArgs e)
         {
-            var dr = new DuplicateRemover(true);
-            dr.Show();
+            var model = new RevisionDuplicateRemover();
+            new DuplicateRemoverForm(model);
         }
 
         private void BtnCompress_Click(object sender, EventArgs e)
         {
-            var cr = new CompressRom();
-            cr.Show();
+            new CompressRomForm().Show();
         }
 
         private void BtnFolderMove_Click(object sender, EventArgs e)
         {
-            var fm = new RootFolder();
-            fm.Show();
+            new RootFolderForm().Show();
         }
     }
 }

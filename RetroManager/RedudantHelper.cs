@@ -1,5 +1,6 @@
 ﻿﻿﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,10 @@ namespace RetroManager
     public static class RedudantHelper
     {
         public static string DefaultDirectory;
-
+        public static List<string> Alphabet = new List<string>() {
+            "Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M", "L", "K", "J", "I", "H", "G", "F",
+            "E", "D", "C", "B", "A"
+        };
 		public static bool DirectoryCheck(string text)
         {
 

@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace RetroManager
 {
-    public partial class RootFolder : Form
+    public partial class RootFolderForm : Form
     {
-        public RootFolder()
+        public RootFolderForm()
         {
             InitializeComponent();
         }

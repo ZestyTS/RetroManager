@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace RetroManager
 {
-    partial class MainMenu
+    partial class MainMenuForm
     {
         /// <summary>
         /// Required designer variable.
