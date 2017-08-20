@@ -43,15 +43,15 @@ namespace RetroManager
 
             var files = Directory.EnumerateFiles(txtDirectory.Text, "*.*", SearchOption.AllDirectories);
             var priority = model is RegionDuplicateRemover ?
-                txtRegions.Text.Replace(" ", string.Empty).Split(',').ToList() : RedudantHelper.Alphabet;
+                txtRegions.Text.Replace(" ", string.Empty).Split(',').ToList() : RedundantHelper.Alphabet;
 
             model.dryRun(files, priority);
         }
 
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
-            txtDirectory.Text = RedudantHelper.Browse(txtDirectory.Text);
-            RedudantHelper.DirectoryCheck(txtDirectory.Text);
+            txtDirectory.Text = RedundantHelper.Browse(txtDirectory.Text);
+            RedundantHelper.DirectoryCheck(txtDirectory.Text);
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace RetroManager
 
         private void DuplicateRemover_Load(object sender, EventArgs e)
 		{
-			txtDirectory.Text = RedudantHelper.GetDefaultDirectory();
+			txtDirectory.Text = RedundantHelper.GetDefaultDirectory();
             ttRegions.IsBalloon = true;
             ttDirectory.IsBalloon = true;
             ttRegions.SetToolTip(lbRegions, "Write the priority of certain regions, whatever is not written will fall under the same priority level.\nExample: (USA), (Europe), (Japan)\nKeep in mind that some regions might be written as [U] instead.");

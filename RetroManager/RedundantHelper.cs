@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace RetroManager
 {
-    public static class RedudantHelper
+    public static class RedundantHelper
     {
         public static string DefaultDirectory;
         public static List<string> Alphabet = new List<string>

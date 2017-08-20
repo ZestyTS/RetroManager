@@ -83,7 +83,7 @@ namespace RetroManager.Models
 
                 var mappedFile = identifierMap[file.title];
 
-                if (RedudantHelper.ConvertTValueToInt(serializedPriority, file.identifier) < RedudantHelper.ConvertTValueToInt(serializedPriority, mappedFile.identifier))
+                if (RedundantHelper.ConvertTValueToInt(serializedPriority, file.identifier) < RedundantHelper.ConvertTValueToInt(serializedPriority, mappedFile.identifier))
                 {
                     identifierMap[file.title] = file;
                     filesToDelete.Add(mappedFile.src);

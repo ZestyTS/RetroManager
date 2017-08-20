@@ -17,7 +17,7 @@ namespace RetroManager
 
             outputPath = Path.GetDirectoryName(inFile);
 
-			if (RedudantHelper.IsUnixBased)
+			if (RedundantHelper.IsUnixBased)
 			{
 				outputPath = outputPath.Replace(@"\", @"/");
 			}
@@ -106,7 +106,7 @@ namespace RetroManager
             Debug.WriteLine("About to Decompress: " + inFile);
             outputPath += @"\" + "RetroManagerExtract";
 
-            if (RedudantHelper.IsUnixBased)
+            if (RedundantHelper.IsUnixBased)
             {
                 outputPath = outputPath.Replace(@"\", @"/");
             }
@@ -134,7 +134,7 @@ namespace RetroManager
 					var outFileName = Path.ChangeExtension(Path.GetFileName(inFile), string.Empty);
 					var outFileWithoutExt = outFileName.Substring(0, outFileName.Length - 1);
 					var outFile = outputPath + @"\" + outFileWithoutExt;
-					if (RedudantHelper.IsUnixBased)
+					if (RedundantHelper.IsUnixBased)
 					{
 						outFile = outFile.Replace(@"\", @"/");
 					}
@@ -188,7 +188,7 @@ namespace RetroManager
                     var outFileName = Path.ChangeExtension(Path.GetFileName(inFile), string.Empty);
                     var outFileWithoutExt = outFileName.Substring(0,outFileName.Length - 1);
 					var outFile = outputPath + @"\" + outFileWithoutExt;
-                    if (RedudantHelper.IsUnixBased)
+                    if (RedundantHelper.IsUnixBased)
 					{
 						outFile = outFile.Replace(@"\", @"/");
 					}

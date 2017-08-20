@@ -15,13 +15,13 @@ namespace RetroManager
 
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
-            txtDirectory.Text = RedudantHelper.Browse(txtDirectory.Text);
+            txtDirectory.Text = RedundantHelper.Browse(txtDirectory.Text);
         }
 
         private void BtnMove_Click(object sender, EventArgs e)
         {
             var reader = txtDirectory.Text;
-            if (!RedudantHelper.DirectoryCheck(reader)) return;
+            if (!RedundantHelper.DirectoryCheck(reader)) return;
             
             var files = from f in Directory.GetFiles(reader, "*.*", SearchOption.AllDirectories) where !Path.GetDirectoryName(f).EndsWith(new DirectoryInfo(reader).Name) select f;
             var failfolder = new ArrayList();
@@ -37,7 +37,7 @@ namespace RetroManager
                 }
             }
 
-            RedudantHelper.FileMaker(failfolder, "FileFolderRenamer");
+            RedundantHelper.FileMaker(failfolder, "FileFolderRenamer");
 
             if (!reader.EndsWith(@"\"))
                 reader = reader + @"\";
@@ -53,7 +53,7 @@ namespace RetroManager
                     fail.Add(newfile);
             }
 
-            RedudantHelper.FileMaker(fail, "MoveToRootFolder");
+            RedundantHelper.FileMaker(fail, "MoveToRootFolder");
         }
 
         private void RootFolder_Load(object sender, EventArgs e)

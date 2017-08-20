@@ -26,7 +26,7 @@ namespace RetroManager
         private void BtnStart_Work(object sender, EventArgs e)
 		{
             var reader = txtDirectory.Text;
-            if (!RedudantHelper.DirectoryCheck(reader)) return;
+            if (!RedundantHelper.DirectoryCheck(reader)) return;
             int percentage;
 
             if (cbExtract.Checked)
@@ -138,13 +138,13 @@ namespace RetroManager
 
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
-			txtDirectory.Text = RedudantHelper.Browse(txtDirectory.Text);
-			RedudantHelper.DirectoryCheck(txtDirectory.Text);
+			txtDirectory.Text = RedundantHelper.Browse(txtDirectory.Text);
+			RedundantHelper.DirectoryCheck(txtDirectory.Text);
         }
 
         private void CompressRom_Load(object sender, EventArgs e)
         {
-			txtDirectory.Text = RedudantHelper.GetDefaultDirectory();
+			txtDirectory.Text = RedundantHelper.GetDefaultDirectory();
             ttDirectory.IsBalloon = true;
             ttef.IsBalloon = true;
             tte.IsBalloon = true;

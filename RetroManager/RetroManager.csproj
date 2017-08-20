@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\DuplicateRemover.cs" />
+    <Compile Include="RedundantHelper.cs" />
     <Compile Include="ViewModels\CompressRomForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,7 +71,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RedudantHelper.cs" />
     <Compile Include="ViewModels\RootFolderForm.cs">
       <SubType>Form</SubType>
     </Compile>
