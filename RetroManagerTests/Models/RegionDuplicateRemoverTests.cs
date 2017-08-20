@@ -25,7 +25,9 @@ namespace RetroManager.Models.Tests
                 "Mario Party DS (EU)",
                 "Mario Party DS (USA)",
                 "Mario Party DS [E]",
-                "Mario Party DS"
+                "Mario Party DS",
+                "Game1",
+                "Game1 [J]"
             };
 
             var expectedFiles = new List<string>
@@ -33,7 +35,9 @@ namespace RetroManager.Models.Tests
                 "Game2 (EU)",
                 "Mario Party DS (USA)",
                 "Mario Party DS [E]",
-                "Mario Party DS"
+                "Mario Party DS",
+                "Game1 [J]",
+                "Game1"
             };
 
             var rd = new RegionDuplicateRemover();
