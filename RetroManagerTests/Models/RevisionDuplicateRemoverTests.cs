@@ -17,14 +17,17 @@ namespace RetroManager.Models.Tests
                 "Game A (REV02)",
                 "Game B",
                 "Game C (Rev A)",
-                "Game C (Rev B)"
+                "Game C (Rev B)",
+                "Game D",
+                "Game D (Rev 1)"
             };
 
             var expectedFiles = new List<string>
             {
                 "Game A (REV00)",
                 "Game A (REV01)",
-                "Game C (Rev A)"
+                "Game C (Rev A)",
+                "Game D"
             };
 
             var rd = new RevisionDuplicateRemover();
