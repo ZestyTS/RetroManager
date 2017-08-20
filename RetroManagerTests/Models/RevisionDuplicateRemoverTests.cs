@@ -1,20 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RetroManager.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RetroManager.Models.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class RevisionDuplicateRemoverTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void RevisionDuplicateRemoverTest()
         {
-            var files = new List<string>()
+            var files = new List<string>
             {
                 "Game A (REV00)",
                 "Game A (REV01)",
@@ -22,7 +18,7 @@ namespace RetroManager.Models.Tests
                 "Game B"
             };
 
-            var expectedFiles = new List<string>()
+            var expectedFiles = new List<string>
             {
                 "Game A (REV00)",
                 "Game A (REV01)"

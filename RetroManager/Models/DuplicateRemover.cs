@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -39,18 +38,12 @@ namespace RetroManager.Models
 
         public abstract void analyze(IEnumerable<string> files);
 
-        public List<string> FilesToDelete
-        {
-            get
-            {
-                return filesToDelete;
-            }
-        }
+        public List<string> FilesToDelete => filesToDelete;
 
         public virtual void delete()
         {
             // Benchmark against Parallel.ForEach()
-            filesToDelete.ForEach(file => File.Delete(file));
+            filesToDelete.ForEach(File.Delete);
             filesToDelete.Clear();
         }
 
@@ -111,7 +104,7 @@ namespace RetroManager.Models
 
             foreach (var file in serializedFiles)
             {
-                if (String.IsNullOrWhiteSpace(file.identifier))
+                if (string.IsNullOrWhiteSpace(file.identifier))
                 {
                     continue;
                 }
@@ -126,7 +119,7 @@ namespace RetroManager.Models
                 var mappedIdentifier = mappedFile.identifier;
                 var currentIdentifier = file.identifier;
 
-                if (String.CompareOrdinal(mappedIdentifier, currentIdentifier) < 0)
+                if (string.CompareOrdinal(mappedIdentifier, currentIdentifier) < 0)
                 {
                     identifierMap[file.title] = file;
                     filesToDelete.Add(mappedFile.src);

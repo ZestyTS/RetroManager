@@ -1,23 +1,23 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RetroManager.Models.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class RegionDuplicateRemoverTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void RegionDuplicateRemoverTest()
         {
-            var priority = new List<string>()
+            var priority = new List<string>
             {
                 "(EU)",
                 "(USA)",
                 "[E]"
             };
 
-            var files = new List<string>()
+            var files = new List<string>
             {
                 "Game2 (EU)",
                 "Mario Party DS (EU)",
@@ -25,7 +25,7 @@ namespace RetroManager.Models.Tests
                 "Mario Party DS [E]"
             };
 
-            var expectedFiles = new List<string>()
+            var expectedFiles = new List<string>
             {
                 "Mario Party DS (USA)",
                 "Mario Party DS [E]"

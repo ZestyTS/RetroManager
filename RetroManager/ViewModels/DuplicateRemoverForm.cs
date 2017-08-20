@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-
 using RetroManager.Models;
 
 namespace RetroManager
@@ -39,7 +35,7 @@ namespace RetroManager
 
         private void BtnSubmit_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(txtRegions.Text) && model is RegionDuplicateRemover)
+            if (string.IsNullOrWhiteSpace(txtRegions.Text) && model is RegionDuplicateRemover)
             {
                 MessageBox.Show(@"Revision field cannot be empty");
                 return;
@@ -47,7 +43,7 @@ namespace RetroManager
 
             var files = Directory.EnumerateFiles(txtDirectory.Text, "*.*", SearchOption.AllDirectories);
             var priority = model is RegionDuplicateRemover ?
-                txtRegions.Text.Replace(" ", String.Empty).Split(',').ToList() : RedudantHelper.Alphabet;
+                txtRegions.Text.Replace(" ", string.Empty).Split(',').ToList() : RedudantHelper.Alphabet;
 
             model.dryRun(files, priority);
         }
