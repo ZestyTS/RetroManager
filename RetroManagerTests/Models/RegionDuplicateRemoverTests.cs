@@ -36,8 +36,7 @@ namespace RetroManager.Models.Tests
                 "Mario Party DS (USA)",
                 "Mario Party DS [E]",
                 "Mario Party DS",
-                "Game1 [J]",
-                "Game1"
+                "Game1 [J]" //this is removed over the non region game only because both of them aren't in the priority list so the first one is taken and all other ones will be removed
             };
 
             var rd = new RegionDuplicateRemover();

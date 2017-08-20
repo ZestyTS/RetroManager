@@ -11,7 +11,8 @@ namespace RetroManager
     public static class RedudantHelper
     {
         public static string DefaultDirectory;
-        public static List<string> Alphabet = new List<string>() {
+        public static List<string> Alphabet = new List<string>
+        {
             "Z", "Y", "X", "W", "V", "U", "T", "S", "R", "Q", "P", "O", "N", "M", "L", "K", "J", "I", "H", "G", "F",
             "E", "D", "C", "B", "A"
         };
@@ -91,5 +92,19 @@ namespace RetroManager
 				return (p == 4) || (p == 6) || (p == 128);
 			}
 		}
+
+        public static int ConvertTValueToInt(Dictionary<string, int>dictionary, string key)
+        {
+            int conversion;
+            try
+            {
+                conversion = dictionary[key];
+            }
+            catch
+            {
+                conversion = int.MaxValue;
+            }
+            return conversion;
+        }
     }
 }
