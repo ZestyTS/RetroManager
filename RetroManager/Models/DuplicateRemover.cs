@@ -24,7 +24,7 @@ namespace RetroManager.Models
                 .Aggregate("", (current, match) => current + match.Value);
 
             title = Path.GetFileName(string.IsNullOrWhiteSpace(untrimmedIdentifier) ?
-                file : file.Replace(untrimmedIdentifier, string.Empty));
+                file.Trim() : file.Replace(untrimmedIdentifier, string.Empty)).Trim();
             src = file;
             identifier = untrimmedIdentifier.Trim();
         }
@@ -96,7 +96,7 @@ namespace RetroManager.Models
 
     public class RevisionDuplicateRemover : DuplicateRemover
     {
-        private Regex pattern = new Regex(@"REV\d\d");
+        private Regex pattern = new Regex(@"\(?Rev\s?\w+\)?", RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
         public override void analyze(IEnumerable<string> files)
         {
@@ -104,11 +104,6 @@ namespace RetroManager.Models
 
             foreach (var file in serializedFiles)
             {
-                if (string.IsNullOrWhiteSpace(file.identifier))
-                {
-                    continue;
-                }
-
                 if (!identifierMap.ContainsKey(file.title))
                 {
                     identifierMap[file.title] = file;
