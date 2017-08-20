@@ -29,9 +29,9 @@ namespace RetroManager.Models.Tests
 
             var expectedFiles = new List<string>
             {
+                "Game2 (EU)",
                 "Mario Party DS (USA)",
-                "Mario Party DS [E]",
-                "Game2 (EU)"
+                "Mario Party DS [E]"
             };
 
             var rd = new RegionDuplicateRemover();
