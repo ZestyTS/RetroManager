@@ -24,14 +24,16 @@ namespace RetroManager.Models.Tests
                 "Game2 (USA, Europe)",
                 "Mario Party DS (EU)",
                 "Mario Party DS (USA)",
-                "Mario Party DS [E]"
+                "Mario Party DS [E]",
+                "Mario Party DS"
             };
 
             var expectedFiles = new List<string>
             {
                 "Game2 (EU)",
                 "Mario Party DS (USA)",
-                "Mario Party DS [E]"
+                "Mario Party DS [E]",
+                "Mario Party DS"
             };
 
             var rd = new RegionDuplicateRemover();
