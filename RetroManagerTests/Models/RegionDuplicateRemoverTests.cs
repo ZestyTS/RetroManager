@@ -12,6 +12,7 @@ namespace RetroManager.Models.Tests
         {
             var priority = new List<string>
             {
+                "(USA, Europe)",
                 "(EU)",
                 "(USA)",
                 "[E]"
@@ -20,6 +21,7 @@ namespace RetroManager.Models.Tests
             var files = new List<string>
             {
                 "Game2 (EU)",
+                "Game2 (USA, Europe)",
                 "Mario Party DS (EU)",
                 "Mario Party DS (USA)",
                 "Mario Party DS [E]"
@@ -28,7 +30,8 @@ namespace RetroManager.Models.Tests
             var expectedFiles = new List<string>
             {
                 "Mario Party DS (USA)",
-                "Mario Party DS [E]"
+                "Mario Party DS [E]",
+                "Game2 (EU)"
             };
 
             var rd = new RegionDuplicateRemover();
