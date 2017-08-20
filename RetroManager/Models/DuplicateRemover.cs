@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -81,8 +82,10 @@ namespace RetroManager.Models
                 }
 
                 var mappedFile = identifierMap[file.title];
-                
-                if (serializedPriority[file.identifier] < serializedPriority[mappedFile.identifier])
+
+                var num = string.IsNullOrEmpty(file.identifier) ? int.MaxValue : serializedPriority[file.identifier];
+
+                if (num < serializedPriority[mappedFile.identifier])
                 {
                     identifierMap[file.title] = file;
                     filesToDelete.Add(mappedFile.src);
