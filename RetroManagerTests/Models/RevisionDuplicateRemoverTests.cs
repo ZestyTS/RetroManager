@@ -19,7 +19,9 @@ namespace RetroManager.Models.Tests
                 "Game C (Rev A)",
                 "Game C (Rev B)",
                 "Game D",
-                "Game D (Rev 1)"
+                "Game D (Rev 1)",
+                "Game E (USA)",
+                "Game E"
             };
 
             var expectedFiles = new List<string>
