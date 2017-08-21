@@ -21,7 +21,7 @@ namespace RetroManager
         private void BtnRevision_Click(object sender, EventArgs e)
         {
             var model = new RevisionDuplicateRemover();
-            new DuplicateRemoverForm(model);
+            new DuplicateRemoverForm(model).Show();
         }
 
         private void BtnCompress_Click(object sender, EventArgs e)
