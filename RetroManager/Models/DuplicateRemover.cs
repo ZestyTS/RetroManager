@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -50,10 +49,18 @@ namespace RetroManager.Models
 
         public virtual List<string> dryRun(IEnumerable<string> files, List<string> identifiers = null)
         {
+            Restart();
             this.identifiers = identifiers;
             analyze(files);
             return filesToDelete;
         }
+
+        public void Restart()
+        {
+            filesToDelete.Clear();
+            identifierMap.Clear();
+        }
+
     }
 
     public class RegionDuplicateRemover : DuplicateRemover
@@ -63,6 +70,7 @@ namespace RetroManager.Models
 
         public override void analyze(IEnumerable<string> files)
         {
+            serializedPriority.Clear();
             var priority = 0;
 
             foreach (var identifier in identifiers)
