@@ -21,7 +21,9 @@ namespace RetroManager.Models.Tests
                 "Game D",
                 "Game D (Rev 1)",
                 "Game E (USA)",
-                "Game E"
+                "Game E",
+                "Game F",
+                "Game F (Rev A)"
             };
 
             var expectedFiles = new List<string>
@@ -29,7 +31,8 @@ namespace RetroManager.Models.Tests
                 "Game A (REV00)",
                 "Game A (REV01)",
                 "Game C (Rev A)",
-                "Game D"
+                "Game D",
+                "Game F"
             };
 
             var rd = new RevisionDuplicateRemover();
