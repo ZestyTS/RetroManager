@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -45,7 +46,8 @@ namespace RetroManager
             var priority = model is RegionDuplicateRemover ?
                 txtRegions.Text.Replace(" ", string.Empty).Split(',').ToList() : RedundantHelper.Alphabet;
 
-            model.dryRun(files, priority);
+            RedundantHelper.FileMaker(new ArrayList(model.dryRun(files, priority)), "DuplicateRemover");
+            btnDelete.Enabled = true;
         }
 
         private void BtnBrowse_Click(object sender, EventArgs e)
