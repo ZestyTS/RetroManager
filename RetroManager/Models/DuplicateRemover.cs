@@ -94,11 +94,12 @@ namespace RetroManager.Models
                 if (RedundantHelper.ConvertTValueToInt(serializedPriority, file.identifier) < RedundantHelper.ConvertTValueToInt(serializedPriority, mappedFile.identifier))
                 {
                     identifierMap[file.title] = file;
-                    filesToDelete.Add(mappedFile.src);
+                    if (!mappedFile.identifier.ToLower().Contains("rev".ToLower()))
+                        filesToDelete.Add(mappedFile.src);
                     continue;
                 }
-
-                filesToDelete.Add(file.src);
+                if (!file.identifier.ToLower().Contains("rev".ToLower()))
+                    filesToDelete.Add(file.src);
             }
         }
     }
