@@ -23,7 +23,8 @@ namespace RetroManager.Models.Tests
                 "Game E (USA)",
                 "Game E",
                 "Game F",
-                "Game F (Rev A)"
+                "Game F (Rev A)",
+                "/emulator/Game E"
             };
 
             var expectedFiles = new List<string>
