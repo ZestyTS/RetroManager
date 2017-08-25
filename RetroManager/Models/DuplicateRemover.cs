@@ -66,7 +66,7 @@ namespace RetroManager.Models
     public class RegionDuplicateRemover : DuplicateRemover
     {
         private Dictionary<string, int> serializedPriority = new Dictionary<string, int>();
-        private Regex pattern = new Regex(@"\s*?(?:\(.*?\)|\[.*?\]|\{.*?\})");
+        private Regex pattern = new Regex(@"\s*?(?:\(.*?\)|\[.*?\]|\{.*?\})", RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
         public override void analyze(IEnumerable<string> files)
         {
