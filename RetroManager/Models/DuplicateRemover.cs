@@ -23,8 +23,8 @@ namespace RetroManager.Models
                 .Cast<Match>()
                 .Aggregate("", (current, match) => current + match.Value);
 
-            title = Path.GetFileName(string.IsNullOrWhiteSpace(untrimmedIdentifier) ?
-                file.Trim() : file.Replace(untrimmedIdentifier, string.Empty)).Trim();
+            title = string.IsNullOrWhiteSpace(untrimmedIdentifier) ?
+                file.Trim() : file.Replace(untrimmedIdentifier, string.Empty).Trim();
             src = file;
             identifier = untrimmedIdentifier.Trim();
         }
