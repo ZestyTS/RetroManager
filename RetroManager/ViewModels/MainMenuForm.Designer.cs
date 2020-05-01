@@ -31,13 +31,11 @@ namespace RetroManager
         /// </summary>
         private void InitializeComponent()
         {
-			this.FormBorderStyle = FormBorderStyle.FixedSingle;
-			this.MaximizeBox = false;
-			this.MinimizeBox = false;
             this.btnRegion = new System.Windows.Forms.Button();
             this.btnRevision = new System.Windows.Forms.Button();
             this.btnCompress = new System.Windows.Forms.Button();
             this.btnFolderMove = new System.Windows.Forms.Button();
+            this.btnBatch = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnRegion
@@ -80,16 +78,30 @@ namespace RetroManager
             this.btnFolderMove.UseVisualStyleBackColor = true;
             this.btnFolderMove.Click += new System.EventHandler(this.BtnFolderMove_Click);
             // 
-            // MainMenu
+            // btnBatch
+            // 
+            this.btnBatch.Location = new System.Drawing.Point(12, 202);
+            this.btnBatch.Name = "btnBatch";
+            this.btnBatch.Size = new System.Drawing.Size(229, 23);
+            this.btnBatch.TabIndex = 4;
+            this.btnBatch.Text = "Batch";
+            this.btnBatch.UseVisualStyleBackColor = true;
+            this.btnBatch.Click += new System.EventHandler(this.BtnBatch_Click);
+            // 
+            // MainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(253, 192);
+            this.ClientSize = new System.Drawing.Size(253, 236);
+            this.Controls.Add(this.btnBatch);
             this.Controls.Add(this.btnFolderMove);
             this.Controls.Add(this.btnCompress);
             this.Controls.Add(this.btnRevision);
             this.Controls.Add(this.btnRegion);
-            this.Name = "MainMenu";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "MainMenuForm";
             this.Text = "Main Menu";
             this.ResumeLayout(false);
 
@@ -101,6 +113,7 @@ namespace RetroManager
         private Button btnRevision;
         private Button btnCompress;
         private Button btnFolderMove;
+        private Button btnBatch;
     }
 }
 

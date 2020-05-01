@@ -58,6 +58,12 @@
     <Compile Include="ViewModels\CompressRomForm.Designer.cs">
       <DependentUpon>CompressRomForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\BatchProcessForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewModels\BatchProcessForm.Designer.cs">
+      <DependentUpon>BatchProcessForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\MainMenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\DuplicateRemoverForm.resx">
       <DependentUpon>DuplicateRemoverForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\BatchProcessForm.resx">
+      <DependentUpon>BatchProcessForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\MainMenuForm.resx">
       <DependentUpon>MainMenuForm.cs</DependentUpon>

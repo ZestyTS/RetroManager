@@ -33,5 +33,10 @@ namespace RetroManager
         {
             new RootFolderForm().Show();
         }
+
+        private void BtnBatch_Click(object sender, EventArgs e)
+        {
+            new BatchProcessForm().Show();
+        }
     }
 }
